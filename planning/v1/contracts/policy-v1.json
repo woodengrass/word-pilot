@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "policy_version": "baseline-1",
+  "status": "engineering_defaults_not_empirical_optima",
+  "memory": {
+    "algorithm": "FSRS-6",
+    "desired_retention": 0.9,
+    "ratings": {
+      "correct_unaided": 3,
+      "incorrect_unaided": 1
+    },
+    "use_latency_for_rating": false,
+    "fit_individual_weights_in_v1": false,
+    "delayed_min_seconds": 86400,
+    "intervening_distinct_targets": 3,
+    "reanchor_validation_max_days": 7,
+    "parameter_source": "S09",
+    "wrapper_conformance_required": true
+  },
+  "evidence": {
+    "foundation": {
+      "unaided_successes": 2,
+      "distinct_families": 2,
+      "delayed_successes": 1
+    },
+    "stable": {
+      "delayed_successes": 3,
+      "distinct_study_dates": 3,
+      "required_long_lag_days": 7,
+      "unseen_check_family_required": true
+    },
+    "lookup_alone_changes_grade": false,
+    "self_rating_enabled": false
+  },
+  "interaction": {
+    "typing_window": 20,
+    "ordinary_typing_max": 2,
+    "case_sensitive_grading": false,
+    "short_passage_words": [50,100],
+    "short_passage_items": [2,3],
+    "automatic_enrollment": false
+  },
+  "time": {
+    "study_day_start_hour": 4,
+    "initial_budget_example_minutes": 15,
+    "uncertain_inactivity_seconds": 120,
+    "exclude_background_time": true
+  },
+  "lookup": {
+    "prompt_distinct_dates": 3,
+    "window_days": 14,
+    "dismissal_cooldown_days": 30,
+    "history_retention_days": 90,
+    "entry_open_only": true
+  },
+  "cost": {
+    "shrinkage_prior_strength": 30,
+    "max_recent_samples_per_bucket": 200,
+    "planning_quantile": 0.75,
+    "seed_seconds": {
+      "teaching": 15,
+      "sentence_choice": 12,
+      "slot_choice": 10,
+      "typed_recall": 20,
+      "feedback": 5,
+      "passage_reading": 45
+    }
+  },
+  "planner": {
+    "high_risk_retrievability_threshold": 0.8,
+    "max_scored_remediation_attempts_per_target_per_day": 3,
+    "simulation_trajectories": 32,
+    "min_horizon_days": 14,
+    "max_detailed_horizon_days": 90,
+    "automatic_budget_increase": false,
+    "parallel_exam_budgets": false,
+    "scope_reduction_changes_scoring": false
+  }
+}
