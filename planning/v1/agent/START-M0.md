@@ -16,7 +16,7 @@
 
 - 原生 iOS：Swift / SwiftUI / Xcode。
 - 本地資料需要適合大量離線詞庫、事件紀錄、搜尋與 migration；SQLite + GRDB 是目前優先候選。
-- 學習排程未來很可能使用 FSRS 或類似方法，但 M0 不需要為了「預留」而提前把完整算法接進來。
+- 學習排程在 M3 使用 FSRS-6（見 `docs/03-learning-engine.md`、T014）；M0 不需要為了「預留」而提前把算法接進來。
 - OpenCode + OMO 是主要 agent 工作流；Xcode tooling 應能真正驗證 iOS build。
 
 如果檢查 repo 或官方資料後認為具體做法應調整，可以自行決定並記錄理由。

@@ -25,7 +25,7 @@
 以下皆非學術最佳常數：
 0.90 target retention、3 個穿插 target、24h delayed、stable 證據數與 7d lag、
 普通題每 20 題最多 2 次鍵盤輸入、3 個日期查詢提示、每日最多 3 次同 target 補救、
-04:00 學習日界線、成本先驗、shrinkage=30、32 組 forecast simulation。
+04:00 學習日界線、成本先驗、shrinkage prior strength=30、32 組 forecast simulation。
 
 改這些值要：
 1. 版本化與說明假設。

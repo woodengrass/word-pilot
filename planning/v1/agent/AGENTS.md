@@ -11,7 +11,7 @@
 
 ## 架構
 - 學習排程、評分與 planner 的核心邏輯不 import SwiftUI、UIKit、CloudKit 或資料庫套件；具體 module 形式由實作決定。
-- 資料只在 Infrastructure 層落地；一般函式注入 clock/calendar/seed，不隱藏讀取 Date.now。
+- 資料存取與核心邏輯分離（形式由實作決定）；一般函式注入 clock/calendar/seed，不隱藏讀取 Date.now。
 - 保存原始事件與版本，衍生狀態可 replay；答案交易要原子且 idempotent。
 - 不用供應商 sense IDs 當專案主鍵；不可在內容升版時重建所有 ID。
 - schema/migrations、lockfile、Xcode project 由當前整合者單一負責，子 agent 不併發修改同一份。

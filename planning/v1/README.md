@@ -6,7 +6,7 @@
 
 ## 先看這裡
 
-給人閱讀：`PLAN.md` 是完整合併版。  
+給人閱讀：`PLAN.md` 是主索引與摘要，完整規格在 `docs/`。  
 給 OpenCode / OMO：分段讀 `docs/`，依 `contracts/tasks.json` 執行。  
 第一次派工：`agent/START-M0.md`。  
 專案規則：將 `agent/AGENTS.md` 合併進既有規則，不直接覆蓋。

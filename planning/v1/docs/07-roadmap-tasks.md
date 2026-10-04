@@ -42,7 +42,7 @@ M0 -> M1 -> M2 -> M3 -> M4 -> M5 -> M6
 驗收：保留 OMO/既有設定；列出工具、成功讀專案/build；沒有 MCP 時記錄 CLI fallback。
 
 ### T004 · M0 · 記錄 M0 技術決策
-依賴：T002。
+依賴：T002, T003。
 驗收：持久化佈局、時間/ID 慣例等仍不確定的重要選擇留下簡短 decision note；不為同步、Android、複雜算法預先工程。
 
 ### T005 · M1 · 來源登記、授權 gate 與自有 IDs
@@ -75,7 +75,7 @@ M0 -> M1 -> M2 -> M3 -> M4 -> M5 -> M6
 
 ### T012 · M2 · 本地備份/匯出/還原
 依賴：T011。
-驗收：一致性快照 + portable JSONL；空白安裝可恢復；損壞檔不毀原資料。
+驗收：一致性快照 + 可攜式匯出（格式由實作決定）；空白安裝可恢復；損壞檔不毀原資料。
 
 ### T013 · M3 · 客觀評分與字串正規化
 依賴：T011。
@@ -123,7 +123,7 @@ M0 -> M1 -> M2 -> M3 -> M4 -> M5 -> M6
 
 ### T024 · M4 · 啟動路由與 widget 搜尋入口
 依賴：T020, T009。
-驗收：有任務/完成的預設正確，deep link 優先，不新增另一份 user DB。
+驗收：有任務/完成的預設正確，deep link 優先，不另建一份使用者資料存放。
 
 ### T025 · M5 · 扩展核心詞與題庫
 依賴：T008, T018。
@@ -157,7 +157,7 @@ M0 -> M1 -> M2 -> M3 -> M4 -> M5 -> M6
 ## 4. OpenCode + OMO 的工作分配
 
 一次指定一個 milestone，主 agent 負責整合：
-- app/domain agent：App/StudyCore，不能改內容 schema 而不通知整合者。
+- app/domain agent：App 與學習核心邏輯，不能改內容 schema 而不通知整合者。
 - content agent：pipeline/fixtures/provenance，不改個人學習狀態定義。
 - tests/review agent：獨立驗收，先看資料完整性和錯誤評分，不只看格式。
 
