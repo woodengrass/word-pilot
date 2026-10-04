@@ -36,6 +36,7 @@ iPhone-first、SwiftUI、SQLite + GRDB、離線詞庫與客觀作答。
 | docs/07-roadmap-tasks.md | M0–M6、31 個有依賴與驗收的任務 |
 | docs/08-research-decisions.md | 文獻決策、工程假設、26 個來源索引 |
 | docs/09-review-load-simulation.md | 複習負荷模擬：每字 unit 數 × 每日時間能撐多少字 |
+| docs/10-exam-personalization-simulation.md | 考試導向背法、滑桿自評與個人化記憶曲線模擬 |
 
 ## 可用的起始契約
 
@@ -46,6 +47,7 @@ iPhone-first、SwiftUI、SQLite + GRDB、離線詞庫與客觀作答。
 `contracts/sources.json`：研究、官方文件與授權來源。
 `contracts/opencode-xcode.fragment.json`：Xcode MCP 設定片段，僅合併 xcode 欄位，保留現有 OMO。
 `tools/simulate_review_load.py`：複習負荷模擬，結果與假設見 docs/09。
+`tools/simulate_exam_personalization.py`：考試導向與個人化模擬，結果見 docs/10。
 
 `examples/` 是格式與行為示例。它們不是全量詞庫，也未經正式雙語內容審訂，不可直接當成已通過品質 gate 的正式內容。
 
