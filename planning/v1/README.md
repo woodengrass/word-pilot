@@ -15,7 +15,7 @@
 
 ## 已定的產品邊界
 
-iPhone-first、SwiftUI、SQLite + GRDB、離線詞庫與客觀作答。
+iPhone-first、SwiftUI、本地資料庫（SQLite / GRDB 為優先候選）、離線詞庫與客觀作答。
 只輸入英文，單字與片語分開管理；查詢不等於加入。
 使用者提供每日可用時間與可選的考試日期，不管理新字數、複習間隔或熟悉度。
 大部分使用點擊題，重視語境、搭配、多義；少量短輸入，寫作目標才嚴格拼字，大小寫永不扣。
@@ -28,47 +28,28 @@ iPhone-first、SwiftUI、SQLite + GRDB、離線詞庫與客觀作答。
 | 文件 | 用途 |
 |---|---|
 | docs/01-product.md | 產品規則、流程、邊界與可驗收需求 |
-| docs/02-architecture-data.md | 技術棧、資料模型、事件、備份、未來同步 |
+| docs/02-architecture-data.md | 技術方向與資料需求（性質，不是 schema） |
 | docs/03-learning-engine.md | 初次學習、客觀評分、FSRS 接法、掌握證據 |
 | docs/04-planner-personalization.md | 時間預算、期限、負荷估計、下一題 |
-| docs/05-content-pipeline.md | 來源授權、AI 全量審查、provenance、內容建置 |
+| docs/05-content-pipeline.md | 內容目標、來源、provenance 與品質 |
 | docs/06-validation-release.md | 28 個重要情境、性能、學習評估、beta |
 | docs/07-roadmap-tasks.md | M0–M6、31 個有依賴與驗收的任務 |
 | docs/08-research-decisions.md | 文獻決策、工程假設、26 個來源索引 |
 
-## 可用的起始契約
+## contracts/
 
-`contracts/content.sql`、`contracts/user.sql`：可以在 SQLite 執行的起始 schema；落成 App 時要轉成受版本管理的 migration。
 `contracts/policy-v1.json`：集中管理未經產品實驗校準的工程初值。
-`contracts/content-entry.schema.json`、`contracts/review-event.schema.json`：可攜格式與事件規則。
-`contracts/tasks.json`：任務 DAG。
-`contracts/sources.json`：研究、官方文件與授權來源。
-`contracts/opencode-xcode.fragment.json`：Xcode MCP 設定片段，僅合併 xcode 欄位，保留現有 OMO。
-
-`examples/` 是格式與行為示例。它們不是全量詞庫，也未經正式雙語內容審訂，不可直接當成已通過品質 gate 的正式內容。
-
-## 執行規格檢查
-
-在本資料夾內：
-
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-python3 -m pip install -r requirements-plan.txt
-python3 tools/validate_plan.py --output validation-report.json
-```
-
-會檢查 JSON schema/示例、SQL/外鍵/FTS、原子回滾與重複作答保護、政策不變條件、任務依賴及引用 ID。
-這不會建置 Swift、不驗證 FSRS 的實際數值、不測 iPhone；這些是 M0/M3/實機階段的驗收。
-已提供一次實際執行的 `validation-report.json`，重跑後可替換。
+`contracts/tasks.json`：任務 DAG，與 `docs/07-roadmap-tasks.md` 相同。
+`contracts/sources.json`：研究、官方文件與授權來源，與 `docs/08-research-decisions.md` 的來源索引相同。
+`contracts/content.sql`、`contracts/user.sql`：一種可行資料表示的參考草稿，說明 docs/02 的資料需求；不是必須遵守的 schema，實作時可自行設計。
 
 ## 一開始的實作順序
 
-M0 工具鏈與資料契約 -> M1 小型內容 -> M2 字典與保存 -> M3 學習循環 ->
+M0 開發基礎 -> M1 小型內容 -> M2 字典與保存 -> M3 學習循環 ->
 M4 時間與考試 -> M5 全量內容與可靠性 -> M6 同學 beta。
 
 不要先把全量內容生成完，也不要先接 CloudKit。
-第一次交給 OMO 的範圍是 T001–T004；開起來、測得動、資料格式一致後再往下。
+第一次交給 OMO 的是 `agent/START-M0.md`：build、測試、本地持久化與依賴可重現後再往下。
 
 ## 未決但不阻擋 M0 的事情
 

@@ -1,4 +1,4 @@
--- Local user contract v1. Events are durable; projections/caches are rebuildable.
+-- Reference draft (not a binding schema; see docs/02). Events are durable; projections/caches are rebuildable.
 PRAGMA foreign_keys = ON;
 PRAGMA user_version = 1;
 

@@ -1,4 +1,4 @@
--- Content contract v1. Initial schema, not an applied production migration.
+-- Reference draft (not a binding schema; see docs/02). Not an applied production migration.
 -- Cross-references from user.sqlite are checked by the application/content validator.
 PRAGMA foreign_keys = ON;
 PRAGMA user_version = 1;

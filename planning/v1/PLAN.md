@@ -31,7 +31,7 @@ Word Pilot 是一個 iPhone-first、離線優先的英文詞彙學習 App，主�
 ## V1 范圍
 
 - Swift + SwiftUI。
-- SQLite + GRDB。
+- 本地資料庫優先考慮 SQLite（GRDB 為優先候選），實作時驗證後鎖定。
 - 核心完全離線。
 - 約 10k–12k 個高品質英文 headword，外加獨立片語集合。
 - 繁中解釋、多詞性、多義項、例句、搭配／用法、詞形與發音資訊。
@@ -42,37 +42,18 @@ Word Pilot 是一個 iPhone-first、離線優先的英文詞彙學習 App，主�
 
 完整產品規則見 `docs/01-product.md`。
 
-## 技術架構
+## 技術方向
 
-App UI 與 StudyCore 分開：
+架構只規定要達成的性質，具體 module、package、schema 由實作時決定並記錄理由：
 
-```
-SwiftUI App
-├── Study
-├── Dictionary
-├── Plans
-├── Settings
-└── Platform integration
-        │
-        ▼
-StudyCore
-├── Domain
-├── Learning
-├── Planning
-├── Persistence contracts
-└── Content contracts
-```
+- 學習排程、評分與 planner 可以脫離 UI 測試與重現；時間、日曆與亂數由外部注入。
+- 詞庫內容與使用者學習資料的生命週期分開：詞庫升版不重置學習紀錄，備份不需複製整個詞庫。是否用兩個 SQLite 檔由實作評估。
+- word / phrase / sense / learning target 有自有的穩定 ID。
+- 原始作答事件是長期 source of truth；mastery、forecast 與 cost profile 是可重新計算的衍生狀態。
 
-StudyCore 不依賴 SwiftUI、UIKit、CloudKit 或 GRDB，時間、日曆與亂數由外部注入。
+`contracts/content.sql`、`contracts/user.sql` 是一種可行資料表示的參考草稿，不是必須遵守的 schema。
 
-資料分成：
-
-- `content.sqlite`：唯讀詞庫、義項、例句、用法、題目、來源。
-- `user.sqlite`：加入狀態、考試、作答事件、查詢事件、學習時間、可重算 projection。
-
-原始事件是長期 source of truth；mastery、forecast 與 cost profile 是可重新計算的衍生狀態。
-
-完整架構見 `docs/02-architecture-data.md`。
+完整說明見 `docs/02-architecture-data.md`。
 
 ## 學習模型
 
@@ -127,7 +108,7 @@ Planner 會：
 
 內容不是 runtime 生成，而是開發階段建立、審查、版本化後打包進 App。
 
-流程：
+參考流程（具體階段與格式由 content tooling 依實際規模設計）：
 
 ```
 來源與授權 gate
@@ -139,7 +120,7 @@ Planner 會：
 → 題目盲解與歧義審查
 → 程式驗證
 → 人工高風險抽查
-→ content.sqlite + provenance
+→ 版本化內容包 + provenance
 ```
 
 每個欄位保留 provenance，包括來源、版本、授權、生成模型、prompt 版本、審查結果與修改歷史。
@@ -160,7 +141,7 @@ QA 覆蓋資料遺失、重複提交、跨日、詞庫升版、考試不足、�
 
 ## 實作里程碑
 
-- M0：工具鏈與資料契約。
+- M0：可靠的開發基礎（build、測試、本地持久化、可重現依賴）。
 - M1：200 詞 + 30 片語 content pilot。
 - M2：離線字典、本機 persistence、備份。
 - M3：客觀評分、FSRS、學習循環、續接。
@@ -168,7 +149,7 @@ QA 覆蓋資料遺失、重複提交、跨日、詞庫升版、考試不足、�
 - M5：完整內容、內容升版與可靠性。
 - M6：同學 beta 與算法校正。
 
-第一輪只做 T001–T004，完成 M0 gate 後停止。
+第一輪只做 M0（`agent/START-M0.md` 的完成條件），完成後停止。
 
 完整任務 DAG 見 `docs/07-roadmap-tasks.md` 與 `contracts/tasks.json`。
 
@@ -187,5 +168,5 @@ OpenCode + OMO：
 1. 讀 `planning/v1/README.md`。
 2. 讀 `planning/v1/agent/AGENTS.md`。
 3. 使用 `planning/v1/agent/START-M0.md`。
-4. 只執行 T001–T004。
+4. 只做 M0；細節與技術選擇依 START-M0 自行決定並記錄。
 5. 完成後提供 build/test/限制報告，再決定是否進 M1。

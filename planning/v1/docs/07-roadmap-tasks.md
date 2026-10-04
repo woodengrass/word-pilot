@@ -4,7 +4,7 @@
 
 | 階段 | 完成後能做什麼 | 不在這一階段做 |
 |---|---|---|
-| M0 工具鏈與契約 | Xcode 可建置、Swift package 可測試、依賴鎖定、資料/時間規則確立。 | 漂亮首頁、全量生成、帳號同步。 |
+| M0 開發基礎 | Xcode 可建置、測試可跑、本地持久化已驗證、依賴可重現、技術決策有紀錄。 | 學習算法、漂亮首頁、全量生成、帳號同步。 |
 | M1 內容 pilot | 200 詞 + 30 片語有來源、可查、可出合格題，內容包可重建。 | 一口氣生成全部十萬題。 |
 | M2 離線字典與資料安全 | 查字、一鍵加入、批次匯入、local persistence、可備份還原。 | 學習效率模型的高階訓練。 |
 | M3 核心學習循環 | 客觀答題 -> 事件 -> FSRS/狀態 -> 下一題；跨日續接，無自評。 | 複雜 deadline 最佳化、fatigue personalization。 |
@@ -29,21 +29,21 @@ M0 -> M1 -> M2 -> M3 -> M4 -> M5 -> M6
 
 任務以 `contracts/tasks.json` 為機器可讀來源。下表是相同內容。
 
-### T001 · M0 · 建立 App / StudyCore / 測試骨架
+### T001 · M0 · 建立 App 與測試基礎
 依賴：無。
-驗收：Simulator 能啟動空 App；純邏輯 package 測試可跑；記錄實際 Xcode/Swift/SDK。
+驗收：實際 Xcode toolchain 可 build 並在 Simulator 執行空 App；automated test 可跑；記錄 Xcode/Swift/SDK 版本。
 
-### T002 · M0 · 鎖定 GRDB 與 FSRS 實作
+### T002 · M0 · 驗證本地持久化與可重現依賴
 依賴：T001。
-驗收：Package.resolved 入庫；確認 FSRS-6 21 參數與 license；API smoke test 可重現。
+驗收：實際保存並重新讀取簡單測試資料；主要 dependency 版本鎖定可重現；學習算法不在 M0 接入。
 
 ### T003 · M0 · 接現有 OpenCode 的 Xcode MCP
 依賴：T001。
 驗收：保留 OMO/既有設定；列出工具、成功讀專案/build；沒有 MCP 時記錄 CLI fallback。
 
-### T004 · M0 · 落定資料/政策 contract 與測試時鐘
+### T004 · M0 · 記錄 M0 技術決策
 依賴：T002。
-驗收：SQL/JSON 初稿轉 GRDB migrations；UUID、UTC、study day、seed、版本定義一致。
+驗收：持久化佈局、時間/ID 慣例等仍不確定的重要選擇留下簡短 decision note；不為同步、Android、複雜算法預先工程。
 
 ### T005 · M1 · 來源登記、授權 gate 與自有 IDs
 依賴：T004。
@@ -59,7 +59,7 @@ M0 -> M1 -> M2 -> M3 -> M4 -> M5 -> M6
 
 ### T008 · M1 · 內容包建置器
 依賴：T007。
-驗收：SQLite/FTS/manifest/hash/attribution 一起產生；所有 cross-reference 有效。
+驗收：可重現的內容包：搜尋索引、版本 manifest、完整性檢查與授權標示一起產生；所有 cross-reference 有效。
 
 ### T009 · M2 · 離線搜尋與字典頁
 依賴：T008。
@@ -83,7 +83,7 @@ M0 -> M1 -> M2 -> M3 -> M4 -> M5 -> M6
 
 ### T014 · M3 · FSRS adapter 與參考向量
 依賴：T013, T002。
-驗收：Again/Good、同日/跨日/失敗一致；正式確認 wrapper learning steps 與曝光例外。
+驗收：選定並鎖定 FSRS-6 實作（確認 21 參數與 license）；Again/Good、同日/跨日/失敗一致；正式確認 wrapper learning steps 與曝光例外。
 
 ### T015 · M3 · target/能力狀態與 replay
 依賴：T014。

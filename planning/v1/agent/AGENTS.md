@@ -10,7 +10,7 @@
 - 只實作被指定的 milestone；完成後報驗收，不順手展開全部後續系統。
 
 ## 架構
-- StudyCore 的 domain/engine 不 import SwiftUI、UIKit、CloudKit、GRDB。
+- 學習排程、評分與 planner 的核心邏輯不 import SwiftUI、UIKit、CloudKit 或資料庫套件；具體 module 形式由實作決定。
 - 資料只在 Infrastructure 層落地；一般函式注入 clock/calendar/seed，不隱藏讀取 Date.now。
 - 保存原始事件與版本，衍生狀態可 replay；答案交易要原子且 idempotent。
 - 不用供應商 sense IDs 當專案主鍵；不可在內容升版時重建所有 ID。
@@ -36,8 +36,7 @@
 ## 內容
 - 素材有 source/license/derivation/review lineage；pending 權利不視為已批准。
 - AI 審核通過不是法律授權，也不是答案絕對正確。
-- examples/ 內是資料格式示例，不是完整或人工審訂的正式詞庫。
-- content.sql/user.sql 為驗證過的起始 contract，實作 migration 時保持一致並補真實回歸測試。
+- contracts/content.sql、user.sql 是參考草稿，不是必須遵守的 schema；實作時依 docs/02 的資料需求自行設計 migration，並補真實回歸測試。
 
 ## 每次交付
 報告完成的任務 ID、修改檔案、實際執行與未執行的驗證、政策/資料版本、限制和下一個可實作任務。

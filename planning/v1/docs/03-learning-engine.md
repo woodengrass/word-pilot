@@ -174,7 +174,7 @@ V1 採可解釋的證據狀態，不把手填權重叫 Bayesian mastery probabil
 後續候選：以 FSRS 的 logit(R)、題型、詞/片語種類、實際 lag、提示、近期錯誤等特徵，訓練正則化 logistic 校準器；需要 held-out 評估，改善才啟用。[S08]
 V1 不訓練大型 DKT，不把 IRT 的資訊量最大化當成學習收益最大化。
 
-## 11. 最小接口
+## 11. 最小接口（示意，實作可調整命名與形式）
 
 ```
 score(question, response, normalizationRules) -> ScoringResult
