@@ -123,6 +123,8 @@ Planner 會：
 
 詳見 `docs/04-planner-personalization.md`。
 
+複習負荷模擬（`docs/09-review-load-simulation.md`）顯示：每天 15 分鐘、一年，每字 1 個 unit 約可開始 2,200 字，每字約 3.6 個 unit 只約 550 字。預設學習深度與新字准入速率需依此調整。
+
 ## 詞庫與 AI pipeline
 
 內容不是 runtime 生成，而是開發階段建立、審查、版本化後打包進 App。

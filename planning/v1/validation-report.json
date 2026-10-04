@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-10-04T16:19:24Z",
+  "generated_at_utc": "2026-10-04T16:23:11Z",
   "python": "3.11.15",
   "sqlite": "3.45.1",
   "passed": true,
@@ -7,7 +7,7 @@
     {
       "check": "referenced files exist",
       "ok": true,
-      "detail": "23 references"
+      "detail": "25 references"
     },
     {
       "check": "JSON schemas are valid draft 2020-12",
