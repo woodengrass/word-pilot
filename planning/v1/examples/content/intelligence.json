@@ -1,0 +1,201 @@
+{
+  "schema_version": 1,
+  "entry": {
+    "id": "f5a8b176-e4ac-5a8d-a380-8a877f0796c2",
+    "kind": "word",
+    "headword": "intelligence",
+    "normalized_key": "intelligence",
+    "pronunciation": [
+      {
+        "ipa": "ɪnˈtelɪdʒəns",
+        "variety": "general"
+      }
+    ],
+    "aliases": [
+      {
+        "normalized_alias": "intelligences",
+        "alias_kind": "inflection"
+      }
+    ],
+    "content_revision": 1,
+    "status": "draft"
+  },
+  "senses": [
+    {
+      "id": "1c681346-6200-5f97-83b8-e16ebe37ab65",
+      "part_of_speech": "noun",
+      "definition_zh": "智力；理解與學習的能力",
+      "editorial_tier": "core",
+      "display_order": 0,
+      "content_revision": 1,
+      "status": "draft",
+      "examples": [
+        {
+          "id": "ce7f22aa-18c6-59b1-a555-b9fb92a37ec2",
+          "sentence_en": "She solved the puzzle with remarkable intelligence.",
+          "translation_zh": "她以過人的智慧解開了謎題。",
+          "family_id": "intelligence-s1-puzzle",
+          "exposure_role": "dictionary",
+          "content_revision": 1
+        }
+      ]
+    },
+    {
+      "id": "20fe947b-402c-5b99-9acc-494ce3f4a05f",
+      "part_of_speech": "noun",
+      "definition_zh": "情報；（尤指軍事或政治的）機密資訊",
+      "editorial_tier": "important",
+      "display_order": 1,
+      "content_revision": 1,
+      "status": "draft",
+      "examples": [
+        {
+          "id": "7cc27998-62cb-51e2-8a3e-75a0b3455d7c",
+          "sentence_en": "The army relied on intelligence about enemy movements.",
+          "translation_zh": "軍隊仰賴關於敵軍動向的情報。",
+          "family_id": "intelligence-s2-army",
+          "exposure_role": "dictionary",
+          "content_revision": 1
+        }
+      ]
+    }
+  ],
+  "usages": [
+    {
+      "id": "87cb641e-ab95-5f7e-a225-ff8ea0db570d",
+      "sense_id": "20fe947b-402c-5b99-9acc-494ce3f4a05f",
+      "pattern_text": "gather intelligence",
+      "explanation_zh": "蒐集情報",
+      "structure": {
+        "verb": "gather",
+        "object": "intelligence"
+      },
+      "editorial_tier": "important",
+      "content_revision": 1
+    }
+  ],
+  "targets": [
+    {
+      "id": "80c3c977-fe64-55dc-8e9a-9a3913d21677",
+      "sense_id": "1c681346-6200-5f97-83b8-e16ebe37ab65",
+      "kind": "sense_comprehension",
+      "editorial_tier": "core",
+      "response_modes": [
+        "recognition"
+      ],
+      "learning_ready": false,
+      "content_revision": 1
+    },
+    {
+      "id": "cbc7c8fe-91ba-561a-8d70-587f44901c0d",
+      "sense_id": "20fe947b-402c-5b99-9acc-494ce3f4a05f",
+      "kind": "sense_comprehension",
+      "editorial_tier": "important",
+      "response_modes": [
+        "recognition"
+      ],
+      "learning_ready": false,
+      "content_revision": 1
+    },
+    {
+      "id": "ebd5c805-3298-5e2c-a1a5-3500efcc8c98",
+      "usage_id": "87cb641e-ab95-5f7e-a225-ff8ea0db570d",
+      "kind": "usage_pattern",
+      "editorial_tier": "important",
+      "response_modes": [
+        "recognition"
+      ],
+      "learning_ready": false,
+      "content_revision": 1
+    },
+    {
+      "id": "e2680677-a4d2-5dcb-ab54-ccc496d21dc7",
+      "kind": "word_form",
+      "editorial_tier": "core",
+      "response_modes": [
+        "cued_recall",
+        "exact_form"
+      ],
+      "learning_ready": false,
+      "content_revision": 1
+    }
+  ],
+  "questions": [
+    {
+      "id": "855f9932-246a-5b24-9c22-798ca006a54f",
+      "revision": 1,
+      "primary_target_id": "cbc7c8fe-91ba-561a-8d70-587f44901c0d",
+      "family_id": "intelligence-s2-embassy",
+      "format": "sense_choice",
+      "response_mode": "recognition",
+      "exposure_role": "train",
+      "status": "draft",
+      "body": {
+        "prompt": "The embassy passed the intelligence to the police before the meeting. 這裡的 intelligence 是什麼意思？",
+        "choices": [
+          "智力",
+          "情報",
+          "智慧型裝置",
+          "理解力"
+        ]
+      },
+      "answers": {
+        "correct_choice_indexes": [
+          1
+        ]
+      },
+      "explanation_zh": "由 embassy、passed to the police 可知是被傳遞的機密資訊。",
+      "editorial_difficulty": "standard"
+    },
+    {
+      "id": "09a77043-69cc-5836-af92-a6f9c2120de7",
+      "revision": 1,
+      "primary_target_id": "e2680677-a4d2-5dcb-ab54-ccc496d21dc7",
+      "family_id": "intelligence-form-iq",
+      "format": "typed_recall",
+      "response_mode": "cued_recall",
+      "exposure_role": "train",
+      "status": "draft",
+      "body": {
+        "prompt": "輸入英文：智力（i_________）"
+      },
+      "answers": {
+        "accepted_forms": [
+          "intelligence"
+        ]
+      },
+      "explanation_zh": "intelligence 指理解與學習的能力。",
+      "editorial_difficulty": "standard"
+    }
+  ],
+  "provenance": [
+    {
+      "id": "e70f8323-76e3-528b-88a4-f8d102d6d55c",
+      "entity_type": "sense",
+      "entity_id": "1c681346-6200-5f97-83b8-e16ebe37ab65",
+      "entity_revision": 1,
+      "field_path": "definition_zh",
+      "value_sha256": "5b59e75229cc55a82910966ac484b3b6cb4670124c9ba4b6a006105ad21f4259",
+      "source_id": "project-editorial",
+      "derivation": "editorial",
+      "process": {
+        "note": "format example; not bilingual-reviewed"
+      },
+      "review_status": "pending"
+    },
+    {
+      "id": "0b9552bc-eb24-583a-abe0-629f12c3ae90",
+      "entity_type": "sense",
+      "entity_id": "20fe947b-402c-5b99-9acc-494ce3f4a05f",
+      "entity_revision": 1,
+      "field_path": "definition_zh",
+      "value_sha256": "46a785528d9331e5b046c37762702e158e2e7da61e7faa16ecf821297ea7a0a5",
+      "source_id": "project-editorial",
+      "derivation": "editorial",
+      "process": {
+        "note": "format example; not bilingual-reviewed"
+      },
+      "review_status": "pending"
+    }
+  ]
+}

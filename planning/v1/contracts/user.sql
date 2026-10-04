@@ -80,21 +80,27 @@ CREATE TABLE learning_event (
     device_sequence INTEGER NOT NULL CHECK(device_sequence > 0),
     kind TEXT NOT NULL CHECK(kind IN ('answer','exposure','reanchor','invalidate','enrollment_change','exam_change','settings_change')),
     presentation_id TEXT REFERENCES presentation(id),
+    entry_id TEXT,
     target_id TEXT,
     response_mode TEXT CHECK(response_mode IN ('recognition','cued_recall','exact_form')),
-    occurred_at_utc TEXT NOT NULL,
+    question_id TEXT,
+    question_revision INTEGER CHECK(question_revision IS NULL OR question_revision > 0),
+    occurred_at_utc TEXT NOT NULL CHECK(occurred_at_utc GLOB '[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]T[0-9][0-9]:[0-9][0-9]:[0-9][0-9].[0-9][0-9][0-9]Z'),
     timezone_id TEXT NOT NULL,
     study_day TEXT NOT NULL,
     schema_version INTEGER NOT NULL,
     policy_version TEXT NOT NULL,
     content_pack_version TEXT NOT NULL,
     payload_json TEXT NOT NULL CHECK(json_valid(payload_json)),
-    UNIQUE(device_id,device_sequence)
+    UNIQUE(device_id,device_sequence),
+    CHECK(kind != 'answer' OR (entry_id IS NOT NULL AND target_id IS NOT NULL AND response_mode IS NOT NULL
+        AND presentation_id IS NOT NULL AND question_id IS NOT NULL AND question_revision IS NOT NULL))
 );
 CREATE UNIQUE INDEX one_answer_per_presentation
     ON learning_event(presentation_id) WHERE kind = 'answer';
 CREATE INDEX event_replay ON learning_event(profile_id,occurred_at_utc,device_id,device_sequence);
 CREATE INDEX event_target ON learning_event(profile_id,target_id,occurred_at_utc);
+CREATE INDEX event_entry ON learning_event(profile_id,entry_id,occurred_at_utc);
 
 CREATE TABLE memory_projection (
     profile_id TEXT NOT NULL REFERENCES local_profile(id),
@@ -132,10 +138,10 @@ CREATE TABLE lookup_event (
     entry_id TEXT NOT NULL,
     viewed_sense_id TEXT,
     occurred_at_utc TEXT NOT NULL,
-    local_date TEXT NOT NULL,
+    study_day TEXT NOT NULL,
     context_json TEXT NOT NULL DEFAULT '{}' CHECK(json_valid(context_json))
 );
-CREATE INDEX lookup_count ON lookup_event(profile_id,entry_id,local_date);
+CREATE INDEX lookup_count ON lookup_event(profile_id,entry_id,study_day);
 CREATE TABLE lookup_prompt_state (
     profile_id TEXT NOT NULL REFERENCES local_profile(id),
     entry_id TEXT NOT NULL,

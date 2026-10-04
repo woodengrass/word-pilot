@@ -116,7 +116,9 @@ response_mode 分 recognition、cued_recall、exact_form。選擇題成功不更
 | LearnerCostProfile | 可重算 | 個人分題型耗時與後續負荷參數。 |
 | DayPlan / Forecast | 可重算 | 計畫快照、版本、採用目標深度與原因。 |
 
-原始事件至少有 event_id、schema_version、device_id、device_sequence、occurred_at_utc_ms、local_day、time_zone、entry_id、target_id、response_mode、presentation_id、question_revision、content_pack_version、policy_version。
+原始事件至少有 id（event ID）、schema_version、device_id、device_sequence、occurred_at_utc、study_day、timezone_id、entry_id、target_id、response_mode、presentation_id、question_id、question_revision、content_pack_version、policy_version；欄位名以 `contracts/user.sql` 為準。
+occurred_at_utc 固定為毫秒精度的 UTC ISO-8601 文字 `YYYY-MM-DDTHH:MM:SS.sssZ`，可直接字典序排序；study_day 是依 study_day_start_hour 切換後的本地學習日（`YYYY-MM-DD`），lookup_event 也使用同一定義。
+非作答事件（enrollment_change、settings_change 等）可不填 target/question 欄位；answer 事件必須填 entry_id、target_id、response_mode、presentation_id、question_id、question_revision。
 作答 payload 保存原答案/正規化答案（若有）、選項順序、首次答案、提示、曝光/中斷標記與耗時；敏感匯出時預設移除原始自由輸入。
 
 相同 presentation 的提交要冪等；重送不得多算一次。更正採新 correction/invalidation 事件，不直接改寫原始答案以掩蓋當時狀況。

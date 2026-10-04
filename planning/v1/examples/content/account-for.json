@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "entry": {
+    "id": "629fde05-578a-56d1-adf0-826cf1be2b25",
+    "kind": "phrase",
+    "headword": "account for",
+    "normalized_key": "account for",
+    "aliases": [
+      {
+        "normalized_alias": "accounts for",
+        "alias_kind": "inflection"
+      },
+      {
+        "normalized_alias": "accounted for",
+        "alias_kind": "inflection"
+      }
+    ],
+    "phrase_detail": {
+      "fixed_parts": [
+        "account",
+        "for"
+      ],
+      "slots": [
+        "sth"
+      ],
+      "separable": false,
+      "object_position": "after for",
+      "legal_forms": [
+        "account for",
+        "accounts for",
+        "accounted for",
+        "accounting for"
+      ]
+    },
+    "content_revision": 1,
+    "status": "draft"
+  },
+  "senses": [
+    {
+      "id": "73257b90-44c9-564e-8012-b3fea463cece",
+      "part_of_speech": "phrasal verb",
+      "definition_zh": "說明；解釋（原因）",
+      "editorial_tier": "core",
+      "display_order": 0,
+      "content_revision": 1,
+      "status": "draft",
+      "examples": [
+        {
+          "id": "71f8c770-d6e7-5b0a-b030-009679fb9cfc",
+          "sentence_en": "How do you account for the sudden drop in sales?",
+          "translation_zh": "你要怎麼解釋銷量突然下滑？",
+          "family_id": "account-for-sales",
+          "exposure_role": "dictionary",
+          "content_revision": 1
+        }
+      ]
+    }
+  ],
+  "usages": [
+    {
+      "id": "40fd58f5-8deb-5d8f-b62a-b0aaaa2ed3c5",
+      "sense_id": "73257b90-44c9-564e-8012-b3fea463cece",
+      "pattern_text": "account for + N",
+      "explanation_zh": "for 不可省略，受詞放在 for 之後",
+      "editorial_tier": "core",
+      "content_revision": 1
+    }
+  ],
+  "targets": [
+    {
+      "id": "46685a0b-cf1b-5a33-a568-ca856c62aa2d",
+      "sense_id": "73257b90-44c9-564e-8012-b3fea463cece",
+      "kind": "phrase_comprehension",
+      "editorial_tier": "core",
+      "response_modes": [
+        "recognition"
+      ],
+      "learning_ready": false,
+      "content_revision": 1
+    },
+    {
+      "id": "cfe15d84-f2fb-5294-bf40-92fc307272ca",
+      "usage_id": "40fd58f5-8deb-5d8f-b62a-b0aaaa2ed3c5",
+      "kind": "phrase_slot",
+      "editorial_tier": "core",
+      "response_modes": [
+        "recognition"
+      ],
+      "learning_ready": false,
+      "content_revision": 1
+    }
+  ],
+  "questions": [
+    {
+      "id": "538d1c42-3331-53ef-8653-0d0e394ae87d",
+      "revision": 1,
+      "primary_target_id": "cfe15d84-f2fb-5294-bf40-92fc307272ca",
+      "family_id": "account-for-delay",
+      "format": "phrase_slot",
+      "response_mode": "recognition",
+      "exposure_role": "train",
+      "status": "draft",
+      "body": {
+        "prompt": "Heavy traffic accounts ___ the delay.",
+        "choices": [
+          "for",
+          "to",
+          "of",
+          "with"
+        ]
+      },
+      "answers": {
+        "correct_choice_indexes": [
+          0
+        ]
+      },
+      "explanation_zh": "account for 是固定搭配，表示「說明、是…的原因」。",
+      "editorial_difficulty": "introductory"
+    }
+  ],
+  "provenance": [
+    {
+      "id": "b305c9bd-d32f-5a58-a2cf-d658a1ae9800",
+      "entity_type": "sense",
+      "entity_id": "73257b90-44c9-564e-8012-b3fea463cece",
+      "entity_revision": 1,
+      "field_path": "definition_zh",
+      "value_sha256": "46bfd14a1c2551a98dd5f4f37e6dd41ac70f7919f3eef616fb6363a6632cc717",
+      "source_id": "project-editorial",
+      "derivation": "editorial",
+      "process": {
+        "note": "format example; not bilingual-reviewed"
+      },
+      "review_status": "pending"
+    }
+  ]
+}

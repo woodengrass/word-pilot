@@ -1,0 +1,68 @@
+{
+  "generated_at_utc": "2026-10-04T16:19:24Z",
+  "python": "3.11.15",
+  "sqlite": "3.45.1",
+  "passed": true,
+  "checks": [
+    {
+      "check": "referenced files exist",
+      "ok": true,
+      "detail": "23 references"
+    },
+    {
+      "check": "JSON schemas are valid draft 2020-12",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "content examples match schema and are internally consistent",
+      "ok": true,
+      "detail": "2 entries"
+    },
+    {
+      "check": "event examples match schema",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "content.sql loads examples, FK/integrity/FTS ok",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "user.sql loads event examples, FK/integrity ok",
+      "ok": true,
+      "detail": "4 events"
+    },
+    {
+      "check": "user.sql guards: one answer per presentation, required answer fields, timestamp format",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "user.sql answer transaction is atomic",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "policy invariants",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "task DAG is well formed and matches roadmap doc",
+      "ok": true,
+      "detail": "31 tasks"
+    },
+    {
+      "check": "every [Sxx] citation resolves in sources.json",
+      "ok": true,
+      "detail": "26 cited / 26 registered"
+    }
+  ],
+  "not_covered": [
+    "Swift build",
+    "FSRS numeric conformance",
+    "device performance"
+  ]
+}

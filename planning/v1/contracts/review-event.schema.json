@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://word-pilot.local/contracts/review-event.schema.json",
+  "title": "Portable learning event v1",
+  "description": "One line of the portable JSONL export. Mirrors the learning_event table in contracts/user.sql; payload is the parsed payload_json.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "profile_id", "device_id", "device_sequence", "kind", "occurred_at_utc", "timezone_id", "study_day", "schema_version", "policy_version", "content_pack_version", "payload"],
+  "$defs": {
+    "uuid": {"type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"},
+    "response_mode": {"enum": ["recognition", "cued_recall", "exact_form"]}
+  },
+  "properties": {
+    "id": {"$ref": "#/$defs/uuid"},
+    "profile_id": {"$ref": "#/$defs/uuid"},
+    "device_id": {"$ref": "#/$defs/uuid"},
+    "device_sequence": {"type": "integer", "minimum": 1},
+    "kind": {"enum": ["answer", "exposure", "reanchor", "invalidate", "enrollment_change", "exam_change", "settings_change"]},
+    "presentation_id": {"$ref": "#/$defs/uuid"},
+    "entry_id": {"$ref": "#/$defs/uuid"},
+    "target_id": {"$ref": "#/$defs/uuid"},
+    "response_mode": {"$ref": "#/$defs/response_mode"},
+    "question_id": {"$ref": "#/$defs/uuid"},
+    "question_revision": {"type": "integer", "minimum": 1},
+    "occurred_at_utc": {"type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z$"},
+    "timezone_id": {"type": "string", "minLength": 1},
+    "study_day": {"type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$"},
+    "schema_version": {"const": 1},
+    "policy_version": {"type": "string", "minLength": 1},
+    "content_pack_version": {"type": "string", "minLength": 1},
+    "payload": {"type": "object"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"kind": {"const": "answer"}}},
+      "then": {
+        "required": ["presentation_id", "entry_id", "target_id", "response_mode", "question_id", "question_revision"],
+        "properties": {
+          "payload": {
+            "type": "object",
+            "required": ["outcome", "first_submission", "assistance", "choice_order", "active_ms"],
+            "properties": {
+              "outcome": {"enum": ["correct", "incorrect", "unscorable", "invalidated"]},
+              "first_submission": {"type": "boolean"},
+              "assistance": {"enum": ["none", "hint", "answer_shown"]},
+              "evidence_class": {"enum": ["practice", "short_term", "delayed"]},
+              "fsrs_rating": {"enum": [1, 3, null]},
+              "orthography": {"enum": ["correct", "incorrect", "not_measured"]},
+              "choice_order": {"type": "array", "items": {"type": "integer", "minimum": 0}},
+              "raw_response": {"type": "string"},
+              "normalized_response": {"type": "string"},
+              "active_ms": {"type": "integer", "minimum": 0},
+              "interrupted": {"type": "boolean"}
+            },
+            "allOf": [
+              {
+                "if": {"properties": {"assistance": {"enum": ["hint", "answer_shown"]}}, "required": ["assistance"]},
+                "then": {"properties": {"fsrs_rating": {"const": null}}}
+              },
+              {
+                "if": {"properties": {"outcome": {"enum": ["unscorable", "invalidated"]}}, "required": ["outcome"]},
+                "then": {"properties": {"fsrs_rating": {"const": null}}}
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {"properties": {"kind": {"const": "exposure"}}},
+      "then": {
+        "properties": {"payload": {"not": {"required": ["fsrs_rating"]}}}
+      }
+    }
+  ]
+}

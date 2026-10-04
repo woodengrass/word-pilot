@@ -1,0 +1,201 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://word-pilot.local/contracts/content-entry.schema.json",
+  "title": "Portable content entry v1",
+  "description": "One Word or Phrase with its senses, usages, learning targets, questions and provenance. Mirrors contracts/content.sql; pipeline stages exchange JSONL lines of this shape.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "entry", "senses", "targets", "questions", "provenance"],
+  "$defs": {
+    "uuid": {"type": "string", "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"},
+    "revision": {"type": "integer", "minimum": 1},
+    "tier": {"enum": ["core", "important", "extended"]},
+    "status": {"enum": ["draft", "reviewed", "published", "retired"]},
+    "response_mode": {"enum": ["recognition", "cued_recall", "exact_form"]},
+    "nonEmpty": {"type": "string", "minLength": 1, "pattern": "\\S"}
+  },
+  "properties": {
+    "schema_version": {"const": 1},
+    "entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "headword", "normalized_key", "content_revision", "status"],
+      "properties": {
+        "id": {"$ref": "#/$defs/uuid"},
+        "kind": {"enum": ["word", "phrase"]},
+        "headword": {"$ref": "#/$defs/nonEmpty"},
+        "normalized_key": {"$ref": "#/$defs/nonEmpty"},
+        "pronunciation": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["ipa"],
+            "properties": {
+              "ipa": {"type": "string"},
+              "variety": {"enum": ["us", "uk", "general"]},
+              "part_of_speech": {"type": "string"}
+            }
+          }
+        },
+        "aliases": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["normalized_alias", "alias_kind"],
+            "properties": {
+              "normalized_alias": {"$ref": "#/$defs/nonEmpty"},
+              "alias_kind": {"enum": ["inflection", "variant", "search"]}
+            }
+          }
+        },
+        "phrase_detail": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "fixed_parts": {"type": "array", "items": {"type": "string"}},
+            "slots": {"type": "array", "items": {"type": "string"}},
+            "separable": {"type": "boolean"},
+            "object_position": {"type": "string"},
+            "legal_forms": {"type": "array", "items": {"type": "string"}}
+          }
+        },
+        "content_revision": {"$ref": "#/$defs/revision"},
+        "status": {"$ref": "#/$defs/status"}
+      }
+    },
+    "senses": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "part_of_speech", "definition_zh", "editorial_tier", "display_order", "content_revision", "status", "examples"],
+        "properties": {
+          "id": {"$ref": "#/$defs/uuid"},
+          "part_of_speech": {"$ref": "#/$defs/nonEmpty"},
+          "definition_zh": {"$ref": "#/$defs/nonEmpty"},
+          "definition_en": {"type": "string"},
+          "editorial_tier": {"$ref": "#/$defs/tier"},
+          "display_order": {"type": "integer", "minimum": 0},
+          "content_revision": {"$ref": "#/$defs/revision"},
+          "status": {"$ref": "#/$defs/status"},
+          "examples": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["id", "sentence_en", "family_id", "exposure_role", "content_revision"],
+              "properties": {
+                "id": {"$ref": "#/$defs/uuid"},
+                "sentence_en": {"$ref": "#/$defs/nonEmpty"},
+                "translation_zh": {"type": "string"},
+                "family_id": {"$ref": "#/$defs/nonEmpty"},
+                "exposure_role": {"enum": ["dictionary", "teaching", "check_only"]},
+                "content_revision": {"$ref": "#/$defs/revision"}
+              }
+            }
+          }
+        }
+      }
+    },
+    "usages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "pattern_text", "explanation_zh", "editorial_tier", "content_revision"],
+        "properties": {
+          "id": {"$ref": "#/$defs/uuid"},
+          "sense_id": {"$ref": "#/$defs/uuid"},
+          "pattern_text": {"$ref": "#/$defs/nonEmpty"},
+          "explanation_zh": {"$ref": "#/$defs/nonEmpty"},
+          "structure": {"type": "object"},
+          "editorial_tier": {"$ref": "#/$defs/tier"},
+          "content_revision": {"$ref": "#/$defs/revision"}
+        }
+      }
+    },
+    "targets": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "kind", "editorial_tier", "response_modes", "learning_ready", "content_revision"],
+        "properties": {
+          "id": {"$ref": "#/$defs/uuid"},
+          "sense_id": {"$ref": "#/$defs/uuid"},
+          "usage_id": {"$ref": "#/$defs/uuid"},
+          "kind": {"enum": ["sense_comprehension", "usage_pattern", "phrase_comprehension", "phrase_slot", "word_form"]},
+          "editorial_tier": {"$ref": "#/$defs/tier"},
+          "response_modes": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/response_mode"}},
+          "learning_ready": {"type": "boolean"},
+          "content_revision": {"$ref": "#/$defs/revision"}
+        }
+      }
+    },
+    "questions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "revision", "primary_target_id", "family_id", "format", "response_mode", "exposure_role", "status", "body", "answers", "explanation_zh", "editorial_difficulty"],
+        "properties": {
+          "id": {"$ref": "#/$defs/uuid"},
+          "revision": {"$ref": "#/$defs/revision"},
+          "primary_target_id": {"$ref": "#/$defs/uuid"},
+          "family_id": {"$ref": "#/$defs/nonEmpty"},
+          "format": {"enum": ["meaning_choice", "reverse_choice", "context_cloze", "collocation_choice", "sense_choice", "phrase_slot", "typed_recall", "exact_form", "passage_item"]},
+          "response_mode": {"$ref": "#/$defs/response_mode"},
+          "exposure_role": {"enum": ["train", "check"]},
+          "group_id": {"type": "string"},
+          "status": {"enum": ["draft", "reviewed", "published", "quarantined", "retired"]},
+          "body": {
+            "type": "object",
+            "required": ["prompt"],
+            "properties": {
+              "prompt": {"$ref": "#/$defs/nonEmpty"},
+              "choices": {"type": "array", "uniqueItems": true, "items": {"$ref": "#/$defs/nonEmpty"}}
+            }
+          },
+          "answers": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "correct_choice_indexes": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "integer", "minimum": 0}},
+              "accepted_forms": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/nonEmpty"}}
+            },
+            "minProperties": 1
+          },
+          "explanation_zh": {"$ref": "#/$defs/nonEmpty"},
+          "editorial_difficulty": {"enum": ["introductory", "standard", "challenging"]}
+        }
+      }
+    },
+    "provenance": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "entity_type", "entity_id", "entity_revision", "field_path", "value_sha256", "source_id", "derivation", "review_status"],
+        "properties": {
+          "id": {"$ref": "#/$defs/uuid"},
+          "entity_type": {"enum": ["entry", "sense", "example", "usage_pattern", "learning_target", "question"]},
+          "entity_id": {"$ref": "#/$defs/uuid"},
+          "entity_revision": {"$ref": "#/$defs/revision"},
+          "field_path": {"$ref": "#/$defs/nonEmpty"},
+          "value_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "source_id": {"$ref": "#/$defs/nonEmpty"},
+          "source_record_id": {"type": "string"},
+          "derivation": {"enum": ["direct", "adapted", "generated", "editorial"]},
+          "process": {"type": "object"},
+          "review_status": {"enum": ["pending", "approved", "disputed", "rejected"]},
+          "inputs": {"type": "array", "items": {"$ref": "#/$defs/uuid"}}
+        }
+      }
+    }
+  }
+}

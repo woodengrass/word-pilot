@@ -1,0 +1,2 @@
+# Only needed for tools/validate_plan.py (spec checks). Not an app dependency.
+jsonschema>=4.21,<5

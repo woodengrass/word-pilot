@@ -1,0 +1,210 @@
+[
+  {
+    "id": "S01",
+    "title": "高中英文參考詞彙表（111 學年度起適用）",
+    "publisher": "大考中心",
+    "checked_on": "2026-10-04",
+    "url": "https://www.ceec.edu.tw/files/file_pool/1/0K213635079130230766/高中英文參考詞彙表(111學年度起適用).pdf",
+    "use_and_limits": "約六千詞條、六級；封面有非營利使用與營利用途書面授權條件。不是完整雙語詞典。"
+  },
+  {
+    "id": "S02",
+    "title": "學測英文考科考試說明（115 學年度起適用）",
+    "publisher": "大考中心",
+    "checked_on": "2026-10-04",
+    "url": "https://www.ceec.edu.tw/files/file_pool/1/0P091472305863258925/01_115學年度起適用學測英文考科考試說明.pdf",
+    "use_and_limits": "測驗包括詞義、構詞、搭配、篇章運用與寫作。不能把一個詞彙 App 說成完整學測準備。"
+  },
+  {
+    "id": "S03",
+    "title": "The Critical Importance of Retrieval for Learning",
+    "publisher": "Karpicke & Roediger, 2008, Science",
+    "checked_on": "2026-10-04",
+    "url": "https://learninglab.psych.purdue.edu/downloads/2008/2008_Karpicke_Roediger_Science.pdf",
+    "use_and_limits": "外語詞對的實驗支持成功回想後繼續提取練習；不是本產品最佳題型比例或間隔的直接證明。"
+  },
+  {
+    "id": "S04",
+    "title": "Effects of retrieval schedules on the acquisition of explicit, automatized-explicit, and implicit knowledge of L2 collocations",
+    "publisher": "Fang, Elgort & Chen, 2024, SSLA",
+    "checked_on": "2026-10-04",
+    "url": "https://www.cambridge.org/core/journals/studies-in-second-language-acquisition/article/abs/effects-of-retrieval-schedules-on-the-acquisition-of-explicit-automatizedexplicit-and-implicit-knowledge-of-l2-collocations/201FABD72088A7F590598A5973E5B499",
+    "use_and_limits": "先學正確搭配再提取。間隔效果依測量能力而異，不代表所有指標都勝過集中練習。"
+  },
+  {
+    "id": "S05",
+    "title": "How well are primary and secondary meanings of L2 words acquired?",
+    "publisher": "González-Fernández & Webb, 2024, SSLA",
+    "checked_on": "2026-10-04",
+    "url": "https://www.cambridge.org/core/journals/studies-in-second-language-acquisition/article/abs/how-well-are-primary-and-secondary-meanings-of-l2-words-acquired/D8D404658168A1BCC7BB9906765DE5DF",
+    "use_and_limits": "該 EFL 實驗中熟詞新義不比生詞首義容易；支持分開記錄義項，不支持硬編最佳引入間隔。"
+  },
+  {
+    "id": "S06",
+    "title": "Duolingo-inspired pretesting with words and pictures improves vocabulary learning",
+    "publisher": "Chua & Pan, 2026, Cognitive Research",
+    "checked_on": "2026-10-04",
+    "url": "https://link.springer.com/article/10.1186/s41235-026-00708-y",
+    "use_and_limits": "成人英語使用者學具體西班牙語名詞，搭配圖像。預測試值得測試，但不能直接外推高中抽象詞與搭配詞。"
+  },
+  {
+    "id": "S07",
+    "title": "A Trainable Spaced Repetition Model for Language Learning",
+    "publisher": "Settles & Meeder, 2016, ACL",
+    "checked_on": "2026-10-04",
+    "url": "https://aclanthology.org/P16-1174/",
+    "use_and_limits": "HLR 是可訓練的記憶模型，列為後續比較基線，不與 FSRS 疊成未驗證的總分。"
+  },
+  {
+    "id": "S08",
+    "title": "When is Deep Learning the Best Approach to Knowledge Tracing?",
+    "publisher": "Gervet et al., 2020, Journal of Educational Data Mining",
+    "checked_on": "2026-10-04",
+    "url": "https://theophilegervet.github.io/assets/pdf/gervet2020deep.pdf",
+    "use_and_limits": "比較多種追蹤模型；模型好壞與資料條件有關，校準須檢查。不是 BKT 或深度模型對本 App 的背書。"
+  },
+  {
+    "id": "S09",
+    "title": "FSRS algorithm specification",
+    "publisher": "Open Spaced Repetition",
+    "checked_on": "2026-10-04",
+    "url": "https://github.com/open-spaced-repetition/awesome-fsrs/wiki/The-Algorithm",
+    "use_and_limits": "FSRS-6 的 D/S/R、21 個參數與同日更新公式。適配客觀選擇題仍須產品層驗證。"
+  },
+  {
+    "id": "S10",
+    "title": "swift-fsrs",
+    "publisher": "Open Spaced Repetition",
+    "checked_on": "2026-10-04",
+    "url": "https://github.com/open-spaced-repetition/swift-fsrs",
+    "use_and_limits": "Swift 實作提供 FSRS-6 與 FSRS-5；明確指定演算法/參數，不能依 README 的預設敘述猜版本。"
+  },
+  {
+    "id": "S11",
+    "title": "GRDB.swift README",
+    "publisher": "GRDB 作者與維護者",
+    "checked_on": "2026-10-04",
+    "url": "https://raw.githubusercontent.com/groue/GRDB.swift/master/README.md",
+    "use_and_limits": "SQLite、migration、observation、concurrency；本次看到的基準版本為 7.11.1。"
+  },
+  {
+    "id": "S12",
+    "title": "CKSyncEngine",
+    "publisher": "Apple",
+    "checked_on": "2026-10-04",
+    "url": "https://developer.apple.com/documentation/cloudkit/cksyncengine-5sie5",
+    "use_and_limits": "協助同步本地與 CloudKit 紀錄；仍須處理狀態持久化、帳號與特定衝突，非零成本自動同步。"
+  },
+  {
+    "id": "S13",
+    "title": "Giving external agents access to Xcode",
+    "publisher": "Apple",
+    "checked_on": "2026-10-04",
+    "url": "https://developer.apple.com/documentation/xcode/giving-external-agents-access-to-xcode",
+    "use_and_limits": "Xcode 外部 agent 可用 xcrun mcpbridge；要啟用權限並開啟專案。"
+  },
+  {
+    "id": "S14",
+    "title": "MCP servers",
+    "publisher": "OpenCode",
+    "checked_on": "2026-10-04",
+    "url": "https://opencode.ai/docs/mcp-servers/",
+    "use_and_limits": "官方目前文件有 local stdio MCP 設定。須以使用者實際安裝版本驗證，不整份覆蓋既有設定。"
+  },
+  {
+    "id": "S15",
+    "title": "SourceKit-LSP README",
+    "publisher": "Swift project",
+    "checked_on": "2026-10-04",
+    "url": "https://raw.githubusercontent.com/swiftlang/sourcekit-lsp/main/README.md",
+    "use_and_limits": "SwiftPM / 編譯資料與索引狀態會影響語義工具；不能把 LSP 沒報錯當成 iOS 成功 build。"
+  },
+  {
+    "id": "S16",
+    "title": "Open English WordNet license",
+    "publisher": "Open English WordNet",
+    "checked_on": "2026-10-04",
+    "url": "https://github.com/globalwordnet/english-wordnet/blob/main/LICENSE.md",
+    "use_and_limits": "CC BY 4.0 並保留底層 Princeton WordNet 的歸屬與條款；保留具體版本的授權檔。"
+  },
+  {
+    "id": "S17",
+    "title": "License and Commercial Use of WordNet",
+    "publisher": "Princeton University",
+    "checked_on": "2026-10-04",
+    "url": "https://wordnet.princeton.edu/license-and-commercial-use",
+    "use_and_limits": "允許使用、修改與散布並有保留聲明要求。不是所有網路英文詞庫的共同授權。"
+  },
+  {
+    "id": "S18",
+    "title": "wordfreq licensing",
+    "publisher": "wordfreq maintainer",
+    "checked_on": "2026-10-04",
+    "url": "https://raw.githubusercontent.com/rspeer/wordfreq/master/LICENSE.txt",
+    "use_and_limits": "程式碼 Apache 2.0；資料與再散布另有 CC BY-SA 4.0 條件。列為隔離、可選來源。"
+  },
+  {
+    "id": "S19",
+    "title": "Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena",
+    "publisher": "Zheng et al., 2023, NeurIPS / arXiv",
+    "checked_on": "2026-10-04",
+    "url": "https://arxiv.org/html/2306.05685",
+    "use_and_limits": "LLM judge 有位置、自我偏好等偏差。該研究不是詞典正確率驗證；本計畫據此保留盲審與人工抽驗。"
+  },
+  {
+    "id": "S20",
+    "title": "Online Backup API",
+    "publisher": "SQLite",
+    "checked_on": "2026-10-04",
+    "url": "https://sqlite.org/backup.html",
+    "use_and_limits": "使用一致性備份，不在 WAL 活動時只複製單一 sqlite 檔。"
+  },
+  {
+    "id": "S21",
+    "title": "TestFlight overview",
+    "publisher": "Apple",
+    "checked_on": "2026-10-04",
+    "url": "https://developer.apple.com/help/app-store-connect/test-a-beta-version/testflight-overview",
+    "use_and_limits": "對同學測試採 TestFlight；外部測試首個 build 需審查，build 有有效期限。"
+  },
+  {
+    "id": "S22",
+    "title": "Developer account overview",
+    "publisher": "Apple",
+    "checked_on": "2026-10-04",
+    "url": "https://developer.apple.com/tw/help/account/basics/about-your-developer-account",
+    "use_and_limits": "Personal Team 可個人真機測試但有短期佈建限制；正式 beta 發布要另外處理開發者會員。"
+  },
+  {
+    "id": "S23",
+    "title": "Linking to specific app scenes from your widget or Live Activity",
+    "publisher": "Apple",
+    "checked_on": "2026-10-04",
+    "url": "https://developer.apple.com/documentation/widgetkit/linking-to-specific-app-scenes-from-your-widget-or-live-activity",
+    "use_and_limits": "Widget 深連結直達字典/學習；入口意圖應優先於一般啟動導向。"
+  },
+  {
+    "id": "S24",
+    "title": "AVSpeechSynthesizer",
+    "publisher": "Apple",
+    "checked_on": "2026-10-04",
+    "url": "https://developer.apple.com/documentation/avfaudio/avspeechsynthesizer",
+    "use_and_limits": "系統 TTS；實際離線聲音可用性與多音詞讀法仍要在目標裝置測試。"
+  },
+  {
+    "id": "S25",
+    "title": "Cognitive fatigue influences students' performance on standardized tests",
+    "publisher": "Sievertsen, Gino & Piovesan, 2016, PNAS",
+    "checked_on": "2026-10-04",
+    "url": "https://www.pnas.org/doi/10.1073/pnas.1516947113",
+    "use_and_limits": "學校考試中的時間與休息效應不能直接換算為手機背單字的每日吸收上限。"
+  },
+  {
+    "id": "S26",
+    "title": "Enhancing human learning via spaced repetition optimization",
+    "publisher": "Tabibian et al., 2019, PNAS",
+    "checked_on": "2026-10-04",
+    "url": "https://europepmc.org/article/PMC/PMC6410796",
+    "use_and_limits": "提供在記憶模型與成本假設下最佳化的研究方向；不把理論最適性套到本產品未校準的規則上。"
+  }
+]
