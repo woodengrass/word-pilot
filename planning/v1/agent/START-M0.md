@@ -1,22 +1,36 @@
-先閱讀 planning/v1/README.md、docs/01-product.md、docs/02-architecture-data.md、
-docs/07-roadmap-tasks.md、contracts/ 與 agent/AGENTS.md。
+# M0｜建立可靠的開發基礎
 
-本次只完成 M0：T001–T004，不做完整 App、不生成全量詞庫。
-若 repo 已存在先檢查，不覆蓋既有設定、程式、AGENTS.md 或 OpenCode/OMO 配置。
+先閱讀：
 
-請建立可建置的 iOS SwiftUI 專案與一個純 Swift StudyCore package，
-部署目標以規格的 iOS 17 作起点，核對實際可用 Xcode/Swift/SDK。
-加入並鎖定 GRDB 與合適的 FSRS-6 Swift 實作；明確確認所用參數和同日學習行为。
-把 contracts SQL 對應成 migration 基線，建立 versioned policy decoding、
-可注入 clock/calendar/seed 和最小測試，不提前做未使用的架構層。
-確認 Xcode MCP 是否可用，保留 CLI fallback；不要替我重配 OMO 模型。
+- `planning/v1/PLAN.md`
+- `planning/v1/agent/AGENTS.md`
+- `planning/v1/docs/07-roadmap-tasks.md` 的 M0
 
-驗收：
-1. Simulator 可啟動空白 App。
-2. StudyCore 測試可執行。
-3. 兩份 DB 可以建立，foreign key / integrity check 通過。
-4. policy 與 sample contracts 可讀。
-5. 記錄 dependency 版本及實際 build/test 結果。
-6. 列出尚需使用者操作的簽名/權限；沒有這類阻礙就自行完成，不問學術參數問題。
+## 目標
 
-完成後交付變更、測試、限制，停在 M0 gate，勿直接進下一里程碑。
+建立一個之後能安心開發 Word Pilot 的 iOS 基礎。
+
+這一階段不需要實作完整字典、學習演算法、全量詞庫或漂亮 UI。重點是確認選定的技術與專案結構能支援後續需求，而不是先把未來架構全部做出來。
+
+## 已知技術方向
+
+- 原生 iOS：Swift / SwiftUI / Xcode。
+- 本地資料需要適合大量離線詞庫、事件紀錄、搜尋與 migration；SQLite + GRDB 是目前優先候選。
+- 學習排程未來很可能使用 FSRS 或類似方法，但 M0 不需要為了「預留」而提前把完整算法接進來。
+- OpenCode + OMO 是主要 agent 工作流；Xcode tooling 應能真正驗證 iOS build。
+
+如果檢查 repo 或官方資料後認為具體做法應調整，可以自行決定並記錄理由。
+
+## M0 完成條件
+
+- iOS App 可以用實際 Xcode toolchain build 並在 Simulator 執行。
+- 專案有可持續使用的 automated test 基礎。
+- 本地持久化方向已被實際驗證，能保存並重新讀取簡單測試資料。
+- 主要 dependency 與 toolchain 版本可重現。
+- OpenCode/OMO 與 Xcode 的實際工作方式已驗證；不要破壞現有 OMO 設定。
+- 架構足以繼續 M1/M2，但沒有為尚未發生的同步、Android、複雜算法做大量預先工程。
+- 對任何仍不確定的重要技術選擇，留下簡短 decision note，而不是用猜測鎖死未來。
+
+只有遇到需要產品 owner 決定的事項才詢問；一般 Swift、Xcode、database、dependency 與測試問題自行調查解決。
+
+完成 M0 後停下來，回報驗證結果與下一個合理 milestone。
