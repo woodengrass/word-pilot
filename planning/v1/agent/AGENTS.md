@@ -4,7 +4,7 @@
 先讀 planning/v1/README.md、docs/07-roadmap-tasks.md 與當前 milestone 涉及的規格。
 
 ## 範圍
-- iOS-first、完全離線核心。不要自行新增登入、伺服器、OCR、照片解析、runtime LLM、廣告或付費。
+- iOS-first、完全離線核心。不要自行新增登入、OCR、照片解析、runtime LLM、廣告或付費。研究用 backend 只有在對應 milestone 明確要求時才可加入，且必須遵守 `docs/privacy-data-collection.md`，不能變成 user-level telemetry。
 - 日常由系統排程，不能用「選 deck / 選模式 / 自評熟悉度」繞過需求。
 - 未加入詞的查詢不會自動 enrollment，大小寫永不扣分。
 - 只實作被指定的 milestone；完成後報驗收，不順手展開全部後續系統。
@@ -31,7 +31,8 @@
 - 超時是未知，不是通過；缺 Xcode/授權/真機不能寫成已驗證。
 - 收到 API 或 symbol 不確定時查官方文件/依賴源碼，再修改。
 - 保留既有 OpenCode + OMO 配置，新增 MCP 只 merge 對應欄位。
-- 不上傳私人資料、不接受付費合約、不修改正式簽名團隊，除非取得明確授權。
+- 不上傳 raw/private user learning data、不建立個人研究 profile；跨使用者研究只能在明確 opt-in 下依 `docs/privacy-data-collection.md` 取得群體 aggregate。
+- 不接受付費合約、不修改正式簽名團隊，除非取得明確授權。
 
 ## 內容
 - 素材有 source/license/derivation/review lineage；pending 權利不視為已批准。
