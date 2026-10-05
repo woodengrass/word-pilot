@@ -70,6 +70,16 @@ FSRS state、mastery、forecast、每日 plan 等最好視為 derived state，�
 
 具體 transaction、WAL、backup API 等做法交由實作 agent依 SQLite/GRDB 官方建議選擇。[S20]
 
+### 7. 跨使用者研究資料不是 user telemetry
+
+若 beta／後續版本需要用群體資料改善演算法，採用 `docs/privacy-data-collection.md` 的方案 A：
+
+- 完整學習歷史與 individual personalization 留在裝置。
+- 研究端只取得經 privacy-preserving aggregation 後的群體統計／模型更新。
+- 不以匿名 user ID 取代真正的 aggregate privacy。
+- 研究資料管線和帳號／同步資料是兩個獨立目的與架構；日後加入 CloudKit 不代表可以直接拿同步資料訓練 population model。
+- 具體密碼協定由實作階段依 threat model 選擇，可考慮 OHTTP 與 multi-party secure aggregation。
+
 ## 未來同步的要求
 
 V1 不做同步，但資料模型不要故意讓未來同步變得不可能。
