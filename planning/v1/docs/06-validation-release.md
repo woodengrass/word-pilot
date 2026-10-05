@@ -94,14 +94,39 @@ TTS 的可用離線 voice 依實機已安裝資源核驗，不能承諾任意高
 
 ## 6. 隱私與故障回復
 
-V1 不嵌追蹤 SDK、不默默上傳學生資料。診斷/研究資料由使用者明確匯出分享，預設移除可識別資訊與不必要自由文字。
-不要求同學提供學校、生日、考卷照片；自己填的考試名稱可能含個人資訊，匯出時提醒。
-裝置鎖定保護配合 iOS 的檔案保護；測試備份/恢復和啟動存取，不為方便改成明文無保護全盤。
-刪除個人資料清除使用者學習資料、相關 caches、待導出的本地副本；不刪 App 內建內容。
-OS/iCloud 裝置備份是系統行為，不能宣稱「手機作業系統完全不會備份任何資料」。
+個人學習歷史與 individual personalization 預設只存在使用者裝置。若 beta／後續要收集統計改善演算法，採用 `docs/privacy-data-collection.md` 的方案 A，而不是一般 user-level analytics：
+
+- research sharing 採明確 opt-in；拒絕不影響核心功能，撤回後停止未來 contribution。
+- raw events、完整單字歷史、個人 memory parameters、自由文字與可重建時間線不走研究 upload path。
+- 裝置只貢獻預先定義的 bounded statistics / model update；研究端只能取得達最低 cohort 門檻的 aggregate。
+- 來源網路 metadata 與可讀 contribution 必須分離；單一 research backend / aggregation share 被攻破不能得到 individual contribution。
+- 不建立穩定 research ID + 個人歷史的替代型「匿名 telemetry」。
+- aggregate query 面要避免小 cohort 與 differencing attack；一般 server logs 也不得破壞 privacy claim。
+- V1/beta 不預設加入 differential-privacy noise；若未來 threat model 或查詢粒度提高再評估。
+
+Apple 要求 user / usage data 即使匿名化仍取得同意，因此匿名聚合不能省略 consent；隱私政策必須與實際收集、撤回、留存行為一致。
+
+另外仍需：
+- 不要求同學提供學校、生日、考卷照片等不必要個資。
+- 裝置鎖定保護配合 iOS Data Protection；測試備份/恢復和啟動存取。
+- 刪除個人資料清除本機使用者學習資料與相關 caches；不刪 App 內建內容。
+- OS/iCloud 裝置備份是系統行為，不能宣稱作業系統完全不會備份。
 
 SQLite 備份用一致性 snapshot/backup API，不直接複製正在寫入的 main DB 而漏掉 WAL。[S20]
 先匯出手動備份再做破壞性 migration；測試復原，不只測產生檔案。
+
+### Privacy acceptance
+
+在任何會送出研究 contribution 的 build 上至少驗證：
+
+- research sharing 關閉時，封包／log 層面都沒有研究資料離開裝置。
+- research backend 不存在可查詢的單一使用者 history / parameter record。
+- raw event 與個人模型沒有旁路 upload。
+- 未達 cohort threshold 的 aggregate 無法釋出。
+- 合法 query 介面不能以高度重疊 cohort 相減還原個人 contribution。
+- 單一 aggregation party / share compromise 不足以還原 contribution。
+- access/error log 不保留能把 contribution 重新連回來源的 metadata。
+- consent 與 withdrawal 行為和 UI／privacy policy 一致。
 
 ## 7. 同學安裝與發佈
 
