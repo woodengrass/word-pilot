@@ -38,7 +38,7 @@ Word Pilot 是一個 iPhone-first、離線優先的英文詞彙學習 App，主�
 - 單字與片語分開建模，但都可以加入考試、長期複習。
 - 支援單字搜尋、一鍵加入與逐行批次貼上。
 - 未收錄內容不可加入；提供明確 Cambridge Dictionary 外連。
-- V1 不做 OCR、照片解析、runtime LLM、帳號、伺服器、同步、Android、訂閱。
+- V1 不做 OCR、照片解析、runtime LLM、帳號、同步、Android、訂閱。核心學習不依賴伺服器；beta／後續可有獨立的 opt-in 隱私聚合研究服務，但不接收 user-level 學習資料。
 
 完整產品規則見 `docs/01-product.md`。
 
@@ -103,6 +103,19 @@ Planner 會：
 個人化先做實際耗時、錯誤補救成本、delayed performance 與 workload；疲勞／邊際效益模型等有真實延遲資料後再啟用。
 
 詳見 `docs/04-planner-personalization.md`。
+
+## 隱私與跨使用者演算法改進
+
+個人化學習資料與個人記憶模型預設只存在裝置上。跨使用者改善演算法時採用 privacy-preserving aggregate research：
+
+- 使用者明確 opt-in；拒絕不影響任何核心功能。
+- raw events、個人詞彙歷史與 individual memory parameters 不上傳。
+- 裝置只產生預先定義的有限統計／模型 contribution。
+- 收集鏈路要分離來源身分與 contribution，並使用安全聚合，使研究端只得到達最低群體門檻的 aggregate。
+- 不建立 user-level telemetry / research profile。
+- 這套研究資料管線與未來 CloudKit／其他同步完全分離。
+
+完整 privacy target、threat model 與驗收見 `docs/privacy-data-collection.md`。
 
 ## 詞庫與 AI pipeline
 
