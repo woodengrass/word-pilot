@@ -35,21 +35,30 @@
     "individual_fit_requires_sufficient_local_data": true,
     "individual_fit_requires_heldout_improvement": true,
     "individual_fit_must_avoid_abrupt_rescheduling": true,
-    "memory_model_conformance_tests_required": true
+    "memory_model_conformance_tests_required": true,
+    "memory_model": "FSRS-6 (21 parameters, S09)",
+    "ratings": {
+      "correct_unaided": 3,
+      "incorrect_unaided": 1
+    },
+    "simulation_acceptance": {
+      "max_budget_overrun": 0,
+      "no_exam_late_true_retention_min": 0.85,
+      "missed_days_late_true_retention_min": 0.8,
+      "param_update_mean_schedule_change_max": 0.1,
+      "param_update_max_schedule_change_max": 0.2,
+      "exam_coverage_not_below_review_first_baseline": true,
+      "deterministic": true
+    }
   },
   "reference_starting_points": {
     "_note": "可參考的起始值，不是要求；實作可替換，替換時記錄理由。說明見 docs/08「可參考的做法」。",
     "memory": {
-      "algorithm": "FSRS-6",
       "initial_desired_retention": 0.9,
       "retention_bounds": [0.7,0.95],
       "retention_reselect_days": 7,
       "retention_max_change_per_reselect": 0.05,
       "long_horizon_days": 90,
-      "ratings": {
-        "correct_unaided": 3,
-        "incorrect_unaided": 1
-      },
       "delayed_min_seconds": 86400,
       "intervening_distinct_targets": 3,
       "reanchor_validation_max_days": 7

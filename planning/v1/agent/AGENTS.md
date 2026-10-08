@@ -18,7 +18,7 @@
 | M1 | `docs/05`、`docs/03` §2–§6、`contracts/sources.json`、`contracts/content.sql` | `docs/08` |
 | M2 | `docs/01`、`docs/02`、`contracts/user.sql`、`docs/06` §2 與 §6 | `docs/03` §6 |
 | M3 | `docs/03`、`docs/01` §5–§6、`contracts/policy-v1.json` 的 `product`、`docs/06` §2–§3 | `docs/08` 可參考的做法 |
-| M4 | `docs/04`、`docs/03` §6、`contracts/policy-v1.json` 的 `product`、`docs/01` §8 | `docs/08` 可參考的做法 |
+| M4 | `docs/04`（含 §9 模擬驗收門檻）、`docs/03` §6、`contracts/policy-v1.json` 的 `product`、`docs/01` §8 | `docs/08` 可參考的做法 |
 | M5 | `docs/05`、`docs/06` | 前面各階段的文件 |
 | M6 | `docs/06` §5–§8、`docs/privacy-data-collection.md` | `docs/08` |
 

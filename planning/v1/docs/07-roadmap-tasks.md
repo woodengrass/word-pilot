@@ -27,7 +27,7 @@ M0 -> M1 -> M2 -> M3 -> M4 -> M5 -> M6
 
 ## 3. 任務清單
 
-33 個任務（T001–T033）的依賴與驗收條件只寫在 `contracts/tasks.json`，這裡不重複。依 `depends_on` 決定順序；同一 milestone 內沒有依賴關係的任務可以並行。
+34 個任務（T001–T034）的依賴與驗收條件只寫在 `contracts/tasks.json`，這裡不重複。依 `depends_on` 決定順序；同一 milestone 內沒有依賴關係的任務可以並行。
 
 ## 4. 多 agent 協作
 
