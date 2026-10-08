@@ -34,7 +34,7 @@
 ## 工程初值統一放 policy-v1.json
 
 以下皆非學術最佳常數：
-0.90 target retention、3 個穿插 target、24h delayed、stable 證據數與 7d lag、
+0.90 起始目標記憶率與 0.70–0.95 動態範圍、規劃配額比例（70% 維持上限、14 天／85% 准入、10% 診斷）、3 個穿插 target、24h delayed、stable 證據數與 7d lag、
 普通題每 20 題最多 2 次鍵盤輸入、3 個日期查詢提示、每日最多 3 次同 target 補救、
 04:00 學習日界線、成本先驗、shrinkage prior strength=30、32 組 forecast simulation。
 

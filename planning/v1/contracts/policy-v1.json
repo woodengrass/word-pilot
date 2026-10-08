@@ -4,7 +4,12 @@
   "status": "engineering_defaults_not_empirical_optima",
   "memory": {
     "algorithm": "FSRS-6",
-    "desired_retention": 0.9,
+    "initial_desired_retention": 0.9,
+    "retention_policy": "dynamic_per_target",
+    "retention_bounds": [0.7,0.95],
+    "retention_reselect_days": 7,
+    "retention_max_change_per_reselect": 0.05,
+    "long_horizon_days": 90,
     "ratings": {
       "correct_unaided": 3,
       "incorrect_unaided": 1
@@ -42,14 +47,8 @@
     "typing_window": 20,
     "ordinary_typing_max": 2,
     "case_sensitive_grading": false,
-    "short_passage_words": [
-      50,
-      100
-    ],
-    "short_passage_items": [
-      2,
-      3
-    ],
+    "short_passage_words": [50,100],
+    "short_passage_items": [2,3],
     "automatic_enrollment": false
   },
   "time": {
@@ -79,7 +78,11 @@
     }
   },
   "planner": {
-    "high_risk_retrievability_threshold": 0.8,
+    "high_risk_margin_below_target": 0.1,
+    "maintenance_share_cap_with_uncovered_scope": 0.7,
+    "admission_horizon_days": 14,
+    "admission_max_projected_review_share": 0.85,
+    "diagnostic_share_cap": 0.1,
     "max_scored_remediation_attempts_per_target_per_day": 3,
     "simulation_trajectories": 32,
     "min_horizon_days": 14,

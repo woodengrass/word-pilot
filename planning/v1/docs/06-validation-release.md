@@ -108,7 +108,7 @@ TTS 的可用離線 voice 依實機已安裝資源核驗，不能承諾任意高
 - research sharing 採明確 opt-in；拒絕不影響核心功能，撤回後停止未來 contribution。
 - raw events、完整單字歷史、個人 memory parameters、自由文字與可重建時間線不走研究 upload path。
 - 裝置只貢獻預先定義的 bounded statistics / model update；研究端只能取得達最低 cohort 門檻的 aggregate。
-- 來源網路 metadata 與可讀 contribution 必須分離；單一 research backend / aggregation share 被攻破不能得到 individual contribution。
+- 來源網路 metadata 與可讀 contribution 必須分離；單一 research backend / aggregation share 被攻破不能得到 individual contribution。beta 先用單一聚合方，此項改為較弱的過渡做法並明確告知（見 `docs/privacy-data-collection.md` 的 Beta 階段）。
 - 不建立穩定 research ID + 個人歷史的替代型「匿名 telemetry」。
 - aggregate query 面要避免小 cohort 與 differencing attack；一般 server logs 也不得破壞 privacy claim。
 - V1/beta 不預設加入 differential-privacy noise；若未來 threat model 或查詢粒度提高再評估。
@@ -133,7 +133,7 @@ SQLite 備份用一致性 snapshot/backup API，不直接複製正在寫入的 m
 - raw event 與個人模型沒有旁路 upload。
 - 未達 cohort threshold 的 aggregate 無法釋出。
 - 合法 query 介面不能以高度重疊 cohort 相減還原個人 contribution。
-- 單一 aggregation party / share compromise 不足以還原 contribution。
+- 單一 aggregation party / share compromise 不足以還原 contribution（正式版）；beta 單一聚合方期間改驗證：資料庫、檔案與 log 不存在單一 contribution，且同意畫面已說明較弱的保證。
 - access/error log 不保留能把 contribution 重新連回來源的 metadata。
 - consent 與 withdrawal 行為和 UI／privacy policy 一致。
 

@@ -85,7 +85,7 @@ FSRS-6 只負責記憶狀態與複習時間。V1 客觀映射：
 
 Planner 會：
 
-- 優先處理到期與高風險內容。
+- 在到期／高風險複習、考試原始範圍覆蓋與新內容之間，依內容價值和每日時間分配；目標記憶率依情況動態決定，不固定（見 `docs/04-planner-personalization.md` §5a、§8）。
 - 控制新內容產生的後續複習債務。
 - 多場考試共用同一份每日時間。
 - 同一項目出現在多場考試只保留一份 mastery。
@@ -105,7 +105,7 @@ Planner 會：
 - 使用者明確 opt-in；拒絕不影響任何核心功能。
 - raw events、個人詞彙歷史與 individual memory parameters 不上傳。
 - 裝置只產生預先定義的有限統計／模型 contribution。
-- 收集鏈路要分離來源身分與 contribution，並使用安全聚合，使研究端只得到達最低群體門檻的 aggregate。
+- 收集鏈路要分離來源身分與 contribution，並使用安全聚合，使研究端只得到達最低群體門檻的 aggregate。beta 先用單一聚合方的過渡做法（保證較弱，需明確告知），正式公開前改為多方安全聚合。
 - 不建立 user-level telemetry / research profile。
 - 這套研究資料管線與未來 CloudKit／其他同步完全分離。
 

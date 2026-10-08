@@ -80,6 +80,17 @@ Word Pilot 採用「方案 A」：
 6. **一般 infrastructure log 不得破壞匿名性。**  
    request body、IP、精確接收時間與其他 network metadata 的保留策略必須和 privacy claim 一起驗證；不能 payload 匿名、server log 卻能重新連回來源。
 
+## Beta 階段：單一聚合方（過渡做法）
+
+beta 先不建立第二個獨立聚合方。這代表上面第 3 點（單一聚合方不足以解出個人 contribution）在 beta 期間**不成立**：資料在傳輸與聚合的當下，聚合伺服器理論上看得到單一 contribution。其他要求照常，並以下列措施降低風險：
+
+- contribution 仍只含預先定義的有限統計，不含 raw events、個人參數、詞彙清單、自由文字或任何 ID。
+- 伺服器收到後立即加進群體累計值；單一 contribution 只在記憶體中短暫存在，不寫入資料庫、檔案或 log。
+- 不記錄來源 IP；接收時間只保留到批次（epoch）。成本可接受時可加上 OHTTP relay 分離來源。
+- 未達最低群體門檻的 aggregate 不釋出；只提供預先定義的 metric，不提供任意分群查詢。
+- 同意畫面與隱私政策明說：beta 的保護依賴營運者不保存單一 contribution 的承諾，不是密碼學保證；伺服器若在運作中被攻破，攻擊者可能看到傳輸中的單一 contribution。
+- 正式公開發布前改成多方安全聚合；做不到就維持告知方式，或停止研究資料收集。
+
 ## Differential Privacy
 
 V1／beta 不把 differential-privacy noise 當預設必要條件。
@@ -124,7 +135,7 @@ Apple App Review Guideline 5.1.1(ii) 要求收集 user / usage data 時取得使
 這個方案要能合理承諾：
 
 - Word Pilot application backend / database / dashboard 被攻破，不會得到可讀的單一使用者學習資料。
-- 任一單一 aggregation party 被攻破，不足以還原 individual contribution。
+- 任一單一 aggregation party 被攻破，不足以還原 individual contribution（正式版；beta 單一聚合方期間不成立，見上方 Beta 階段）。
 - 研究端拿不到「來源 IP ↔ 可讀 contribution」的對應表。
 - 最終只有滿足最低群體門檻的預定 aggregate。
 
@@ -142,7 +153,7 @@ Apple App Review Guideline 5.1.1(ii) 要求收集 user / usage data 時取得使
 - 關閉 research sharing 時沒有任何研究 contribution 離開裝置，核心學習功能完全正常。
 - raw learning events、個人詞彙歷史與 individual memory parameters 沒有研究 upload path。
 - 研究 backend 沒有 user-level research table 或穩定 user/research identifier。
-- 單一 backend compromise 或單一 aggregation share 無法讀出個人 contribution。
+- 單一 backend compromise 或單一 aggregation share 無法讀出個人 contribution（正式版）。beta 單一聚合方期間改為驗證：資料庫、檔案與 log 中不存在單一 contribution，且同意畫面已說明較弱的保證。
 - aggregate 未達 privacy threshold 時無法釋出。
 - 不能利用合法介面產生兩個高度重疊 aggregate 再相減得到個人 contribution。
 - 一般 access/error logs 不保存足以把 contribution 重新連回來源的 metadata。
