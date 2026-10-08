@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "policy_version": "baseline-1",
+  "policy_version": "baseline-2",
   "status": "engineering_defaults_not_empirical_optima",
   "memory": {
     "algorithm": "FSRS-6",
