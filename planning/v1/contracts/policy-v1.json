@@ -1,98 +1,102 @@
 {
-  "schema_version": 1,
-  "policy_version": "baseline-2",
-  "status": "engineering_defaults_not_empirical_optima",
-  "memory": {
-    "algorithm": "FSRS-6",
-    "initial_desired_retention": 0.9,
-    "retention_policy": "dynamic_per_target",
-    "retention_bounds": [0.7,0.95],
-    "retention_reselect_days": 7,
-    "retention_max_change_per_reselect": 0.05,
-    "long_horizon_days": 90,
-    "ratings": {
-      "correct_unaided": 3,
-      "incorrect_unaided": 1
-    },
-    "use_latency_for_rating": false,
-    "fit_individual_weights_in_v1": true,
-    "delayed_min_seconds": 86400,
-    "intervening_distinct_targets": 3,
-    "reanchor_validation_max_days": 7,
-    "parameter_source": "S09",
-    "wrapper_conformance_required": true,
-    "individual_fit_requires_sufficient_local_data": true,
-    "individual_fit_requires_heldout_improvement": true,
-    "individual_fit_must_avoid_abrupt_rescheduling": true,
-    "desired_retention_is_product_outcome": false
-  },
-  "evidence": {
-    "foundation": {
-      "unaided_successes": 2,
-      "distinct_families": 2,
-      "delayed_successes": 1
-    },
-    "stable": {
-      "delayed_successes": 3,
-      "distinct_study_dates": 3,
-      "required_long_lag_days": 7,
-      "unseen_check_family_required": true
-    },
-    "lookup_alone_changes_grade": false,
+  "schema_version": 2,
+  "policy_version": "baseline-3",
+  "product": {
+    "_note": "產品規則：使用者看得到的行為，必須遵守；數值可在 beta 後調整，但程式要能不改碼就調整。",
     "self_rating_enabled": false,
-    "one_presentation_max_independent_primary_grade": 1,
-    "foundation_is_universal_exam_completion_gate": false
-  },
-  "interaction": {
+    "use_latency_for_rating": false,
+    "case_sensitive_grading": false,
+    "automatic_enrollment": false,
+    "lookup_alone_changes_grade": false,
     "typing_window": 20,
     "ordinary_typing_max": 2,
-    "case_sensitive_grading": false,
-    "short_passage_words": [50,100],
-    "short_passage_items": [2,3],
-    "automatic_enrollment": false
-  },
-  "time": {
     "study_day_start_hour": 4,
     "initial_budget_example_minutes": 15,
-    "uncertain_inactivity_seconds": 120,
-    "exclude_background_time": true
-  },
-  "lookup": {
-    "prompt_distinct_dates": 3,
-    "window_days": 14,
-    "dismissal_cooldown_days": 30,
-    "history_retention_days": 90,
-    "entry_open_only": true
-  },
-  "cost": {
-    "shrinkage_prior_strength": 30,
-    "max_recent_samples_per_bucket": 200,
-    "planning_quantile": 0.75,
-    "seed_seconds": {
-      "teaching": 15,
-      "sentence_choice": 12,
-      "slot_choice": 10,
-      "typed_recall": 20,
-      "feedback": 5,
-      "passage_reading": 45
-    }
-  },
-  "planner": {
-    "high_risk_margin_below_target": 0.1,
-    "maintenance_share_cap_with_uncovered_scope": 0.7,
-    "admission_horizon_days": 14,
-    "admission_max_projected_review_share": 0.85,
-    "diagnostic_share_cap": 0.1,
-    "max_scored_remediation_attempts_per_target_per_day": 3,
-    "simulation_trajectories": 32,
-    "min_horizon_days": 14,
-    "max_detailed_horizon_days": 90,
+    "exclude_background_time": true,
+    "lookup": {
+      "prompt_distinct_dates": 3,
+      "window_days": 14,
+      "dismissal_cooldown_days": 30,
+      "history_retention_days": 90,
+      "entry_open_only": true
+    },
     "automatic_budget_increase": false,
     "parallel_exam_budgets": false,
     "scope_reduction_changes_scoring": false,
     "daily_budget_is_hard_planning_constraint": true,
     "original_exam_scope_is_progress_denominator": true,
     "due_review_backlog_is_not_mandatory_daily_work": true,
-    "unseen_contextual_exam_performance_is_primary_outcome": true
+    "unseen_contextual_exam_performance_is_primary_outcome": true,
+    "desired_retention_is_product_outcome": false,
+    "one_presentation_max_independent_primary_grade": 1,
+    "individual_parameters_stay_on_device": true,
+    "retention_target_is_dynamic": true,
+    "individual_memory_fit_on_device_in_v1": true,
+    "individual_fit_requires_sufficient_local_data": true,
+    "individual_fit_requires_heldout_improvement": true,
+    "individual_fit_must_avoid_abrupt_rescheduling": true,
+    "memory_model_conformance_tests_required": true
+  },
+  "reference_starting_points": {
+    "_note": "可參考的起始值，不是要求；實作可替換，替換時記錄理由。說明見 docs/08「可參考的做法」。",
+    "memory": {
+      "algorithm": "FSRS-6",
+      "initial_desired_retention": 0.9,
+      "retention_bounds": [0.7,0.95],
+      "retention_reselect_days": 7,
+      "retention_max_change_per_reselect": 0.05,
+      "long_horizon_days": 90,
+      "ratings": {
+        "correct_unaided": 3,
+        "incorrect_unaided": 1
+      },
+      "delayed_min_seconds": 86400,
+      "intervening_distinct_targets": 3,
+      "reanchor_validation_max_days": 7
+    },
+    "evidence": {
+      "foundation": {
+        "unaided_successes": 2,
+        "distinct_families": 2,
+        "delayed_successes": 1
+      },
+      "stable": {
+        "delayed_successes": 3,
+        "distinct_study_dates": 3,
+        "required_long_lag_days": 7,
+        "unseen_check_family_required": true
+      }
+    },
+    "interaction": {
+      "short_passage_words": [50,100],
+      "short_passage_items": [2,3]
+    },
+    "time": {
+      "uncertain_inactivity_seconds": 120
+    },
+    "cost": {
+      "shrinkage_prior_strength": 30,
+      "max_recent_samples_per_bucket": 200,
+      "planning_quantile": 0.75,
+      "seed_seconds": {
+        "teaching": 15,
+        "sentence_choice": 12,
+        "slot_choice": 10,
+        "typed_recall": 20,
+        "feedback": 5,
+        "passage_reading": 45
+      }
+    },
+    "planner": {
+      "high_risk_margin_below_target": 0.1,
+      "maintenance_share_cap_with_uncovered_scope": 0.7,
+      "admission_horizon_days": 14,
+      "admission_max_projected_review_share": 0.85,
+      "diagnostic_share_cap": 0.1,
+      "max_scored_remediation_attempts_per_target_per_day": 3,
+      "simulation_trajectories": 32,
+      "min_horizon_days": 14,
+      "max_detailed_horizon_days": 90
+    }
   }
 }

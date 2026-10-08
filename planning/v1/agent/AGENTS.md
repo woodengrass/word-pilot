@@ -5,9 +5,10 @@
 ## 怎麼讀規劃文件
 
 - 每件事只有一個唯一來源（見 `planning/v1/PLAN.md` 的表）。其他地方只放指向，不重複內容；發現不一致時以唯一來源為準，並回報。
-- 文件中的規則是要求，必須遵守。
-- `contracts/policy-v1.json` 的數值都是**工程初值**，beta 後會校準。程式必須從 policy 讀取，不可寫死；改值要版本化，並跑回歸測試和受影響事件的 replay。
-- 寫成「為什麼」、引用 [Sxx] 的段落是背景。完整理由在 `docs/08`，實作時不必逐條遵循。
+- docs 01–07 寫的是**要達成什麼**與驗收，必須遵守；**怎麼做由你決定**，並在 decision note 記錄理由。
+- `docs/08`「可參考的做法」與 `policy-v1.json` 的 `reference_starting_points` 是參考，不是要求；可以採用、修改或替換。
+- `policy-v1.json` 的 `product` 是產品規則，必須遵守。所有數值（含你自己選的）都要能不改程式碼就調整，因為 beta 後會校準；改值要版本化，並跑回歸測試和受影響事件的 replay。
+- 寫成「為什麼」、引用 [Sxx] 的段落是背景，完整理由在 `docs/08`。
 - `contracts/content.sql`、`user.sql` 是參考草稿，不是必須遵守的 schema。
 - 只讀當前 milestone 需要的文件（下表），不要提前實作後面階段的內容。
 
@@ -16,8 +17,8 @@
 | M0 | `PLAN.md`、`agent/START-M0.md`、`docs/02`、tasks.json 的 M0 | — |
 | M1 | `docs/05`、`docs/03` §2–§6、`contracts/sources.json`、`contracts/content.sql` | `docs/08` |
 | M2 | `docs/01`、`docs/02`、`contracts/user.sql`、`docs/06` §2 與 §6 | `docs/03` §6 |
-| M3 | `docs/03`、`docs/01` §5–§6、`contracts/policy-v1.json`（memory、evidence、interaction）、`docs/06` §2–§3 | `docs/04` §8 |
-| M4 | `docs/04`、`docs/03` §7、`contracts/policy-v1.json`（time、cost、planner、lookup、memory）、`docs/01` §8 | `docs/08` |
+| M3 | `docs/03`、`docs/01` §5–§6、`contracts/policy-v1.json` 的 `product`、`docs/06` §2–§3 | `docs/08` 可參考的做法 |
+| M4 | `docs/04`、`docs/03` §6、`contracts/policy-v1.json` 的 `product`、`docs/01` §8 | `docs/08` 可參考的做法 |
 | M5 | `docs/05`、`docs/06` | 前面各階段的文件 |
 | M6 | `docs/06` §5–§8、`docs/privacy-data-collection.md` | `docs/08` |
 
@@ -39,7 +40,7 @@
 - 建立必要接口即可，不製造尚無需求的 ServiceLocator、插件框架或雙向同步層。
 
 ## 研究與參數
-- FSRS wrapper/defaults 先核對版本與 conformance，不憑記憶猜 API。
+- 採用任何記憶模型或第三方實作時，先核對版本、參數數量與 license，不憑記憶猜 API。
 - 不把答得快、查字、單次選擇答對直接等同掌握；也不要要求非書寫考試的所有內容通過中英互譯／精確拼字。
 - 義項與作答方式需要能力證據隔離，但不必每個維度都建一份獨立、永久的複習義務；同一題不重複計成多次獨立成功。優先度先採有來源的粗分級，不先做完整考古題出題機率模型。
 - 無法可靠評分的題目標 unscorable/quarantined，不扣學生分數。

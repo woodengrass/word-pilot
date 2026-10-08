@@ -29,20 +29,9 @@ M0 -> M1 -> M2 -> M3 -> M4 -> M5 -> M6
 
 33 個任務（T001–T033）的依賴與驗收條件只寫在 `contracts/tasks.json`，這裡不重複。依 `depends_on` 決定順序；同一 milestone 內沒有依賴關係的任務可以並行。
 
-## 4. OpenCode + OMO 的工作分配
+## 4. 多 agent 協作
 
-一次指定一個 milestone，主 agent 負責整合：
-- app/domain agent：App 與學習核心邏輯，不能改內容 schema 而不通知整合者。
-- content agent：pipeline/fixtures/provenance，不改個人學習狀態定義。
-- tests/review agent：獨立驗收，先看資料完整性和錯誤評分，不只看格式。
-
-schema/migration、Package.resolved、Xcode project 設定一次只有一個寫入者。
-子 agent 可先提出差異或在不同分支工作，不讓多個進程同時修改同一個 Simulator/local DB 或打架寫 pbxproj。
-不用為了這個專案增加一堆新 harness/插件；保留使用者既有 OMO。
-
-每個任務交付必須包含：
-變更檔案、通過/未跑的測試、資料/政策版本、已知限制、下一個可執行任務。
-不把「看起來可編譯」寫成「build 成功」。
+怎麼分工由主 agent 決定。要求只有：一次只做一個 milestone；schema/migration、lockfile、Xcode project 等共用檔案同時只有一個寫入者；獨立驗收先看資料完整性與錯誤評分。交付報告內容見 `agent/AGENTS.md`。
 
 ## 5. 後續階段，先不實作
 

@@ -2,7 +2,7 @@
 
 版本：1.2｜日期：2026-10-08
 
-本文件是摘要與索引。細節只寫在下表的「唯一來源」，這裡不重複；兩者不一致時以唯一來源為準。
+本文件是摘要與索引。細節只寫在下表的「唯一來源」，這裡不重複；兩者不一致時以唯一來源為準。規格只寫要達成什麼與驗收，怎麼做由實作決定；可參考的做法集中在 `docs/08`。
 
 ## 產品目標
 
@@ -14,11 +14,11 @@ iPhone-first、離線的英文詞彙 App，對象是台灣高中生。**目標�
 
 1. 核心完全離線；無帳號、無 runtime LLM、無 OCR、無同步。（01）
 2. 查字不等於加入；大小寫永不扣分；未收錄字只能外連 Cambridge，不能加入。（01）
-3. 主力題型是「句子留空、從英文選項選詞」；看到英文猜詞義不能冒充選詞能力。（03 §4–5）
+3. 主力題型是「句子留空、從英文選項選詞」；看到英文猜詞義不能冒充選詞能力。（03 §1、§4）
 4. 不同義項、辨認／產出證據分開記錄，但不讓每個能力都產生獨立的永久複習義務；同一題不算多次成功。（03 §2）
-5. 有效、無提示、首次作答：對 → Good，錯 → Again；提示後、看過答案、中斷、題目有問題都不給 Good。（03 §7）
+5. 只有有效、無提示、首次作答能當作記憶證據；提示後、看過答案、中斷、題目有問題都不算成功。（03 §4、§6）
 6. 每日時間是硬上限，積欠不是必須清償的債；不縮小原始考試範圍的分母，不放寬評分。（04）
-7. 目標記憶率是動態決定的手段，不是產品目標。（04 §5a）
+7. 目標記憶率是動態決定的手段，不是產品目標；個人記憶曲線在本機長期更新，不早期固定、不大跳。（03 §6、04 §3）
 8. 原始作答事件是唯一真相，其餘狀態可重算；詞庫與使用者資料分開，詞庫升版不重置學習。（02）
 9. 個人資料與個人模型只留在裝置；跨使用者研究只取得群體統計，需明確 opt-in。（privacy-data-collection.md）
 
@@ -28,14 +28,14 @@ iPhone-first、離線的英文詞彙 App，對象是台灣高中生。**目標�
 |---|---|
 | 產品範圍、畫面、流程、需求 R01–R20 | `docs/01-product.md` |
 | 技術方向與資料需求 | `docs/02-architecture-data.md` |
-| 題型、評分、FSRS 接法、證據狀態 | `docs/03-learning-engine.md` |
-| 時間預算、考試、動態記憶率、出題順序、forecast | `docs/04-planner-personalization.md` |
+| 題型、評分、記憶模型要求、證據狀態 | `docs/03-learning-engine.md` |
+| 時間預算、考試、動態記憶率、新舊內容平衡、forecast | `docs/04-planner-personalization.md` |
 | 詞庫來源、AI pipeline、內容品質 | `docs/05-content-pipeline.md` |
 | QA 情境（含關鍵 QA）、測試、性能、beta 評估、發佈 | `docs/06-validation-release.md` |
 | 里程碑說明、團隊分工、後續階段 | `docs/07-roadmap-tasks.md` |
 | 任務、依賴、驗收條件 | `contracts/tasks.json` |
-| 所有可調數值（初值） | `contracts/policy-v1.json` |
-| 設計理由、研究依據、未知問題 | `docs/08-research-decisions.md` |
+| 產品規則數值（`product`）與可參考起始值（`reference_starting_points`） | `contracts/policy-v1.json` |
+| 設計理由、可參考的做法（演算法、出題順序）、未知問題 | `docs/08-research-decisions.md` |
 | 文獻與官方來源 [Sxx] | `contracts/sources.json` |
 | 研究資料隱私 | `docs/privacy-data-collection.md` |
 | 資料表參考草稿（非強制 schema） | `contracts/content.sql`、`contracts/user.sql` |

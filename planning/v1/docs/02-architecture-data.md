@@ -55,7 +55,7 @@ word、phrase、sense、learning target 等需要穩定 ID。
 
 ### 5. 衍生狀態可重建
 
-FSRS state、mastery、forecast、每日 plan 等最好視為 derived state，而不是唯一真相。
+記憶狀態、mastery、forecast、每日 plan 等最好視為 derived state，而不是唯一真相。
 
 演算法升級時，系統應至少能對重要狀態重新計算或安全遷移。
 
