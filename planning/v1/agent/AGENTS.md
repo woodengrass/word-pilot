@@ -1,7 +1,27 @@
 # 此專案的 Agent 實作規則
 
 本檔是專案專用規則範本。與既有 AGENTS.md 合併，不覆蓋使用者其他通用開發規則。
-先讀 planning/v1/README.md、docs/07-roadmap-tasks.md 與當前 milestone 涉及的規格。
+
+## 怎麼讀規劃文件
+
+- 每件事只有一個唯一來源（見 `planning/v1/PLAN.md` 的表）。其他地方只放指向，不重複內容；發現不一致時以唯一來源為準，並回報。
+- 文件中的規則是要求，必須遵守。
+- `contracts/policy-v1.json` 的數值都是**工程初值**，beta 後會校準。程式必須從 policy 讀取，不可寫死；改值要版本化，並跑回歸測試和受影響事件的 replay。
+- 寫成「為什麼」、引用 [Sxx] 的段落是背景。完整理由在 `docs/08`，實作時不必逐條遵循。
+- `contracts/content.sql`、`user.sql` 是參考草稿，不是必須遵守的 schema。
+- 只讀當前 milestone 需要的文件（下表），不要提前實作後面階段的內容。
+
+| Milestone | 必讀 | 需要時再查 |
+|---|---|---|
+| M0 | `PLAN.md`、`agent/START-M0.md`、`docs/02`、tasks.json 的 M0 | — |
+| M1 | `docs/05`、`docs/03` §2–§6、`contracts/sources.json`、`contracts/content.sql` | `docs/08` |
+| M2 | `docs/01`、`docs/02`、`contracts/user.sql`、`docs/06` §2 與 §6 | `docs/03` §6 |
+| M3 | `docs/03`、`docs/01` §5–§6、`contracts/policy-v1.json`（memory、evidence、interaction）、`docs/06` §2–§3 | `docs/04` §8 |
+| M4 | `docs/04`、`docs/03` §7、`contracts/policy-v1.json`（time、cost、planner、lookup、memory）、`docs/01` §8 | `docs/08` |
+| M5 | `docs/05`、`docs/06` | 前面各階段的文件 |
+| M6 | `docs/06` §5–§8、`docs/privacy-data-collection.md` | `docs/08` |
+
+每個 milestone 的任務與驗收條件一律以 `contracts/tasks.json` 為準。
 
 ## 範圍
 - iOS-first、完全離線核心。不要自行新增登入、OCR、照片解析、runtime LLM、廣告或付費。研究用 backend 只有在對應 milestone 明確要求時才可加入，且必須遵守 `docs/privacy-data-collection.md`，不能變成 user-level telemetry。
@@ -19,7 +39,6 @@
 - 建立必要接口即可，不製造尚無需求的 ServiceLocator、插件框架或雙向同步層。
 
 ## 研究與參數
-- 規格中標為工程初值的門檻不是文獻最佳常數。
 - FSRS wrapper/defaults 先核對版本與 conformance，不憑記憶猜 API。
 - 不把答得快、查字、單次選擇答對直接等同掌握；也不要要求非書寫考試的所有內容通過中英互譯／精確拼字。
 - 義項與作答方式需要能力證據隔離，但不必每個維度都建一份獨立、永久的複習義務；同一題不重複計成多次獨立成功。優先度先採有來源的粗分級，不先做完整考古題出題機率模型。

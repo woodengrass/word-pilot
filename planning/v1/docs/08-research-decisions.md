@@ -22,26 +22,17 @@
 
 ## 2026-10-08｜V1 決策整合（產品取捨，不是已證實的最適值）
 
-- **最終結果**：在期限、學生指定的完整範圍與每日時間下改善未見考試型語境題的表現；無期限時改善長期有用的詞彙能力。FSRS R、已開始字數、foundation_verified 與 backlog 都只是規劃／診斷指標。
-- **直接測到考試能力**：非書寫考試以句中留空、英文選項選詞、搭配及少量短文為主，不必先通過所有雙向翻譯／精確拼字。看到英文後從上下文猜詞義與留空選詞應分別看待；語境本身的線索屬合法解題，額外提示才是受輔助。
-- **義項只做可修訂的粗分級**：基礎優先／常用補充／延後學習。先用合法分級、一般頻率、適齡用法與少量代表性考題覆核，不做完整考古題爬取、逐義項的精密出題機率模型。
-- **避免重複義務**：義項與辨認／產出證據分開，但不保證每個 sense × mode 都要獨立做完一套複習。同一題不能複製成多次獨立 Good；已充分支持當前考試能力的內容，可降低密集單題維持，保留必要檢查。
-- **每日上限與期限共同約束**：考前平衡原始範圍覆蓋、必要維持、薄弱處與新內容帶來的後續成本；不能讓 backlog 逼學生無限加時，也不能縮小原始範圍分母假裝全部達標。
-- **本機個人化**：FSRS-6 作可重現起點，有足夠個人有效資料時才嘗試調參；使用 held-out 預測與排程穩定性驗證，無改善就保留原參數，不強制上傳。
+這天把 V1 改成以考試能力為目標：主力改為語境選詞、義項三層粗分級、能力證據分開但不各自產生複習義務、每日時間為硬上限、只在本機做個人化。規則本身寫在 `PLAN.md` 的核心規則與 03、04；這裡只記理由。
 
-既有負荷／考試模擬可指出獨立 unit 過多及固定高 retention 的成本風險，但**沒有實證量到真人長文與共享能力證據的改善幅度**。需要在 pilot / beta 比較相同投入時間下的延遲未見語境題表現、原始範圍覆蓋與持續複習負荷；不能先寫死閱讀增加記憶的百分比，再用模擬證明它有效。
+- 理由：模擬顯示每個字拆成越多獨立複習單元，每天固定時間內能學的字越少；固定高 retention 的成本也偏高。
+- 限制：這些模擬**沒有量到真人在短文與共享能力證據下的改善幅度**。要在 pilot／beta 比較相同投入時間下的延遲未見語境題、原始範圍覆蓋與複習負荷；不能先寫死閱讀增加記憶的百分比，再用模擬證明它有效。
 
-## 工程初值統一放 policy-v1.json
+## 工程初值
 
-以下皆非學術最佳常數：
-0.90 起始目標記憶率與 0.70–0.95 動態範圍、規劃配額比例（70% 維持上限、14 天／85% 准入、10% 診斷）、3 個穿插 target、24h delayed、stable 證據數與 7d lag、
-普通題每 20 題最多 2 次鍵盤輸入、3 個日期查詢提示、每日最多 3 次同 target 補救、
-04:00 學習日界線、成本先驗、shrinkage prior strength=30、32 組 forecast simulation。
-
-改這些值要：
-1. 版本化與說明假設。
-2. 跑 deterministic 回歸與受影響事件 replay。
-3. 用延遲新題/有效時間/負擔觀察，不只看當下分數。
+所有可調數值只放在 `contracts/policy-v1.json`，都不是學術最佳常數。改值要：
+1. 版本化並說明假設。
+2. 跑 deterministic 回歸與受影響事件的 replay。
+3. 用延遲新題、有效時間與負擔觀察，不只看當下分數。
 4. 涉及評分標準或舊資料語義時保留舊版本，不靜默覆蓋。
 
 ## 認真保留的未知問題
@@ -56,162 +47,12 @@
 
 這些不是開發前必須向使用者詢問的選项；先把可測基線與資料收集（本地）做對，再用測試者自願資料改進。
 
-## 來源索引
+## 後續研究候選（V1 不實作）
 
-完整機器可讀來源在 `contracts/sources.json`。以下保留用途、網址与限制；軟體依賴版本以實作時 lockfile 為準，資料來源則固定到內容包 manifest。
+- **校準器**：以 FSRS 的 logit(R)、題型、詞／片語種類、實際 lag、提示、近期錯誤等特徵，訓練正則化 logistic 校準器；held-out 評估有改善才啟用。[S08] V1 不訓練大型 DKT，不把 IRT 的資訊量最大化當成學習收益最大化。
+- **時長與效率**：用題型、長度、target 熟悉度、lag、是否提示、連續學習時長、當日累計時長預測延遲後未見題表現；比較加入時長特徵能否在 held-out 資料改善預測。先跑 shadow mode，不直接干預。樣本不足時不輸出「你最佳學習上限是 37 分鐘」之類的結論。模型經實驗確認後，才用個人化的延遲收益取代固定比例。
+- **比較基線**：HLR、logistic knowledge tracing。[S07][S08]
 
-### [S01] 高中英文參考詞彙表（111 學年度起適用）
-大考中心。查核日期：2026-10-04。
-用途與限制：約六千詞條、六級；封面有非營利使用與營利用途書面授權條件。不是完整雙語詞典。
+## 來源
 
-`https://www.ceec.edu.tw/files/file_pool/1/0K213635079130230766/高中英文參考詞彙表(111學年度起適用).pdf`
-
-### [S02] 學測英文考科考試說明（115 學年度起適用）
-大考中心。查核日期：2026-10-04。
-用途與限制：測驗包括詞義、構詞、搭配、篇章運用與寫作。不能把一個詞彙 App 說成完整學測準備。
-
-`https://www.ceec.edu.tw/files/file_pool/1/0P091472305863258925/01_115學年度起適用學測英文考科考試說明.pdf`
-
-### [S03] The Critical Importance of Retrieval for Learning
-Karpicke & Roediger, 2008, Science。查核日期：2026-10-04。
-用途與限制：外語詞對的實驗支持成功回想後繼續提取練習；不是本產品最佳題型比例或間隔的直接證明。
-
-`https://learninglab.psych.purdue.edu/downloads/2008/2008_Karpicke_Roediger_Science.pdf`
-
-### [S04] Effects of retrieval schedules on the acquisition of explicit, automatized-explicit, and implicit knowledge of L2 collocations
-Fang, Elgort & Chen, 2024, SSLA。查核日期：2026-10-04。
-用途與限制：先學正確搭配再提取。間隔效果依測量能力而異，不代表所有指標都勝過集中練習。
-
-`https://www.cambridge.org/core/journals/studies-in-second-language-acquisition/article/abs/effects-of-retrieval-schedules-on-the-acquisition-of-explicit-automatizedexplicit-and-implicit-knowledge-of-l2-collocations/201FABD72088A7F590598A5973E5B499`
-
-### [S05] How well are primary and secondary meanings of L2 words acquired?
-González-Fernández & Webb, 2024, SSLA。查核日期：2026-10-04。
-用途與限制：該 EFL 實驗中熟詞新義不比生詞首義容易；支持分開記錄義項，不支持硬編最佳引入間隔。
-
-`https://www.cambridge.org/core/journals/studies-in-second-language-acquisition/article/abs/how-well-are-primary-and-secondary-meanings-of-l2-words-acquired/D8D404658168A1BCC7BB9906765DE5DF`
-
-### [S06] Duolingo-inspired pretesting with words and pictures improves vocabulary learning
-Chua & Pan, 2026, Cognitive Research。查核日期：2026-10-04。
-用途與限制：成人英語使用者學具體西班牙語名詞，搭配圖像。預測試值得測試，但不能直接外推高中抽象詞與搭配詞。
-
-`https://link.springer.com/article/10.1186/s41235-026-00708-y`
-
-### [S07] A Trainable Spaced Repetition Model for Language Learning
-Settles & Meeder, 2016, ACL。查核日期：2026-10-04。
-用途與限制：HLR 是可訓練的記憶模型，列為後續比較基線，不與 FSRS 疊成未驗證的總分。
-
-`https://aclanthology.org/P16-1174/`
-
-### [S08] When is Deep Learning the Best Approach to Knowledge Tracing?
-Gervet et al., 2020, Journal of Educational Data Mining。查核日期：2026-10-04。
-用途與限制：比較多種追蹤模型；模型好壞與資料條件有關，校準須檢查。不是 BKT 或深度模型對本 App 的背書。
-
-`https://theophilegervet.github.io/assets/pdf/gervet2020deep.pdf`
-
-### [S09] FSRS algorithm specification
-Open Spaced Repetition。查核日期：2026-10-04。
-用途與限制：FSRS-6 的 D/S/R、21 個參數與同日更新公式。適配客觀選擇題仍須產品層驗證。
-
-`https://github.com/open-spaced-repetition/awesome-fsrs/wiki/The-Algorithm`
-
-### [S10] swift-fsrs
-Open Spaced Repetition。查核日期：2026-10-04。
-用途與限制：Swift 實作提供 FSRS-6 與 FSRS-5；明確指定演算法/參數，不能依 README 的預設敘述猜版本。
-
-`https://github.com/open-spaced-repetition/swift-fsrs`
-
-### [S11] GRDB.swift README
-GRDB 作者與維護者。查核日期：2026-10-04。
-用途與限制：SQLite、migration、observation、concurrency；本次看到的基準版本為 7.11.1。
-
-`https://raw.githubusercontent.com/groue/GRDB.swift/master/README.md`
-
-### [S12] CKSyncEngine
-Apple。查核日期：2026-10-04。
-用途與限制：協助同步本地與 CloudKit 紀錄；仍須處理狀態持久化、帳號與特定衝突，非零成本自動同步。
-
-`https://developer.apple.com/documentation/cloudkit/cksyncengine-5sie5`
-
-### [S13] Giving external agents access to Xcode
-Apple。查核日期：2026-10-04。
-用途與限制：Xcode 外部 agent 可用 xcrun mcpbridge；要啟用權限並開啟專案。
-
-`https://developer.apple.com/documentation/xcode/giving-external-agents-access-to-xcode`
-
-### [S14] MCP servers
-OpenCode。查核日期：2026-10-04。
-用途與限制：官方目前文件有 local stdio MCP 設定。須以使用者實際安裝版本驗證，不整份覆蓋既有設定。
-
-`https://opencode.ai/docs/mcp-servers/`
-
-### [S15] SourceKit-LSP README
-Swift project。查核日期：2026-10-04。
-用途與限制：SwiftPM / 編譯資料與索引狀態會影響語義工具；不能把 LSP 沒報錯當成 iOS 成功 build。
-
-`https://raw.githubusercontent.com/swiftlang/sourcekit-lsp/main/README.md`
-
-### [S16] Open English WordNet license
-Open English WordNet。查核日期：2026-10-04。
-用途與限制：CC BY 4.0 並保留底層 Princeton WordNet 的歸屬與條款；保留具體版本的授權檔。
-
-`https://github.com/globalwordnet/english-wordnet/blob/main/LICENSE.md`
-
-### [S17] License and Commercial Use of WordNet
-Princeton University。查核日期：2026-10-04。
-用途與限制：允許使用、修改與散布並有保留聲明要求。不是所有網路英文詞庫的共同授權。
-
-`https://wordnet.princeton.edu/license-and-commercial-use`
-
-### [S18] wordfreq licensing
-wordfreq maintainer。查核日期：2026-10-04。
-用途與限制：程式碼 Apache 2.0；資料與再散布另有 CC BY-SA 4.0 條件。列為隔離、可選來源。
-
-`https://raw.githubusercontent.com/rspeer/wordfreq/master/LICENSE.txt`
-
-### [S19] Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena
-Zheng et al., 2023, NeurIPS / arXiv。查核日期：2026-10-04。
-用途與限制：LLM judge 有位置、自我偏好等偏差。該研究不是詞典正確率驗證；本計畫據此保留盲審與人工抽驗。
-
-`https://arxiv.org/html/2306.05685`
-
-### [S20] Online Backup API
-SQLite。查核日期：2026-10-04。
-用途與限制：使用一致性備份，不在 WAL 活動時只複製單一 sqlite 檔。
-
-`https://sqlite.org/backup.html`
-
-### [S21] TestFlight overview
-Apple。查核日期：2026-10-04。
-用途與限制：對同學測試採 TestFlight；外部測試首個 build 需審查，build 有有效期限。
-
-`https://developer.apple.com/help/app-store-connect/test-a-beta-version/testflight-overview`
-
-### [S22] Developer account overview
-Apple。查核日期：2026-10-04。
-用途與限制：Personal Team 可個人真機測試但有短期佈建限制；正式 beta 發布要另外處理開發者會員。
-
-`https://developer.apple.com/tw/help/account/basics/about-your-developer-account`
-
-### [S23] Linking to specific app scenes from your widget or Live Activity
-Apple。查核日期：2026-10-04。
-用途與限制：Widget 深連結直達字典/學習；入口意圖應優先於一般啟動導向。
-
-`https://developer.apple.com/documentation/widgetkit/linking-to-specific-app-scenes-from-your-widget-or-live-activity`
-
-### [S24] AVSpeechSynthesizer
-Apple。查核日期：2026-10-04。
-用途與限制：系統 TTS；實際離線聲音可用性與多音詞讀法仍要在目標裝置測試。
-
-`https://developer.apple.com/documentation/avfaudio/avspeechsynthesizer`
-
-### [S25] Cognitive fatigue influences students' performance on standardized tests
-Sievertsen, Gino & Piovesan, 2016, PNAS。查核日期：2026-10-04。
-用途與限制：學校考試中的時間與休息效應不能直接換算為手機背單字的每日吸收上限。
-
-`https://www.pnas.org/doi/10.1073/pnas.1516947113`
-
-### [S26] Enhancing human learning via spaced repetition optimization
-Tabibian et al., 2019, PNAS。查核日期：2026-10-04。
-用途與限制：提供在記憶模型與成本假設下最佳化的研究方向；不把理論最適性套到本產品未校準的規則上。
-
-`https://europepmc.org/article/PMC/PMC6410796`
+所有 [Sxx] 的標題、網址、查核日期與用途限制只放在 `contracts/sources.json`。軟體依賴版本以實作時的 lockfile 為準，資料來源版本固定到內容包 manifest。

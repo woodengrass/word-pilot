@@ -77,7 +77,7 @@
     "publisher": "Open Spaced Repetition",
     "checked_on": "2026-10-04",
     "url": "https://github.com/open-spaced-repetition/swift-fsrs",
-    "use_and_limits": "Swift 實作提供 FSRS-6 與 FSRS-5；明確指定演算法/參數，不能依 README 的預設敘述猜版本。"
+    "use_and_limits": "Swift 實作只有排程、沒有參數最佳化器。2026-10 查核時最新 tag v5.0.0 預設 FSRS-5（19 參數），FSRS-6 只在 main；必須明確指定 FSRS-6 與 21 個參數，不能依 README 的預設敘述猜版本。"
   },
   {
     "id": "S11",
