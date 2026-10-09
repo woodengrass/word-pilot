@@ -17,7 +17,7 @@
 | M1 | `docs/05`、`docs/03` §2–§6、`contracts/sources.json` | `docs/08` |
 | M2 | `docs/01`、`docs/02`、`docs/06` §2 與 §6 | `docs/03` §6 |
 | M3 | `docs/03`、`docs/01` §5–§6、`contracts/policy-v1.json` 的 `product`、`docs/06` §2–§3 | `docs/08` 可參考的做法 |
-| M4 | `docs/04`（含 §9 模擬驗收門檻）、`docs/03` §6、`contracts/policy-v1.json` 的 `product`、`docs/01` §8 | `docs/08` 可參考的做法 |
+| M4 | `docs/04`（含 §9 模擬驗收門檻）、`docs/03` §6、`docs/01` §4–6、`contracts/policy-v1.json` 的 `product` | `docs/08` 可參考的做法 |
 | M5 | `docs/05`、`docs/06` | 前面各階段的文件 |
 | M6 | `docs/06` §5–§8、`docs/privacy-data-collection.md` | `docs/08` |
 
@@ -43,7 +43,7 @@
 - 不把答得快、查字、單次選擇答對直接等同掌握；也不要要求非書寫考試的所有內容通過中英互譯／精確拼字。
 - 義項與作答方式需要能力證據隔離，但不必每個維度都建一份獨立、永久的複習義務；同一題不重複計成多次獨立成功。優先度先採有來源的粗分級，不先做完整考古題出題機率模型。
 - 無法可靠評分的題目標 unscorable/quarantined，不扣學生分數。
-- 不默默改教學效果定義來讓 forecast 看起來可行。
+- 不默默改教學效果定義來讓 forecast 看起來可行；沒有學滿設定時間不代表答錯或能力不足。時間是預計安排量，不能強制截題、暗中修改使用者的預算；長期投入不足提醒即使無考試也需適度觸發。
 
 ## 工具與驗證
 - iOS build/test 以 Xcode 結果為準；可用 Xcode MCP，CLI 作 fallback。
