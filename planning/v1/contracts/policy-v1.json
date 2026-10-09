@@ -1,6 +1,6 @@
 {
-  "schema_version": 2,
-  "policy_version": "baseline-3",
+  "schema_version": 3,
+  "policy_version": "baseline-4",
   "product": {
     "_note": "產品規則：使用者看得到的行為，必須遵守；數值可在 beta 後調整，但程式要能不改碼就調整。",
     "self_rating_enabled": false,
@@ -23,7 +23,6 @@
     "automatic_budget_increase": false,
     "parallel_exam_budgets": false,
     "scope_reduction_changes_scoring": false,
-    "daily_budget_is_hard_planning_constraint": true,
     "original_exam_scope_is_progress_denominator": true,
     "due_review_backlog_is_not_mandatory_daily_work": true,
     "unseen_contextual_exam_performance_is_primary_outcome": true,
@@ -42,20 +41,38 @@
       "incorrect_unaided": 1
     },
     "simulation_acceptance": {
-      "max_budget_overrun": 0,
-      "no_exam_late_true_retention_min": 0.85,
-      "missed_days_late_true_retention_min": 0.8,
+      "planned_next_activity_must_fit_estimated_remaining_time": true,
+      "actual_time_overrun_from_finishing_started_item_allowed": true,
+      "report_actual_time_overrun_distribution": true,
+      "compare_delayed_progress_and_new_coverage_at_equal_actual_time": true,
+      "no_exam_must_not_pass_by_avoiding_new_learning": true,
+      "exam_scope_denominator_must_not_shrink": true,
+      "partial_sessions_missed_days_and_changed_budget_required": true,
+      "meaningful_progress_under_partial_sessions_required": true,
       "param_update_mean_schedule_change_max": 0.1,
       "param_update_max_schedule_change_max": 0.2,
-      "exam_coverage_not_below_review_first_baseline": true,
       "deterministic": true
-    }
+    },
+    "daily_budget_is_estimated_target_not_forced_stop": true,
+    "normal_daily_budget_is_editable": true,
+    "today_only_budget_override_resets_next_study_day": true,
+    "complete_started_item_or_allow_voluntary_pause": true,
+    "do_not_auto_change_budget_from_usage": true,
+    "prolonged_underuse_reminder_even_without_exam": true,
+    "underuse_reminder_can_be_dismissed_or_deferred": true,
+    "stale_presentation_after_inactive_hours": 72,
+    "stale_presentation_replacement_must_not_grade_unanswered_item": true,
+    "opening_old_question_alone_does_not_extend_expiry": true,
+    "old_draft_submission_cannot_fabricate_delayed_recall": true
   },
   "reference_starting_points": {
     "_note": "可參考的起始值，不是要求；實作可替換，替換時記錄理由。說明見 docs/08「可參考的做法」。",
     "memory": {
       "initial_desired_retention": 0.9,
-      "retention_bounds": [0.7,0.95],
+      "retention_bounds": [
+        0.7,
+        0.95
+      ],
       "retention_reselect_days": 7,
       "retention_max_change_per_reselect": 0.05,
       "long_horizon_days": 90,
@@ -77,11 +94,20 @@
       }
     },
     "interaction": {
-      "short_passage_words": [50,100],
-      "short_passage_items": [2,3]
+      "short_passage_words": [
+        50,
+        100
+      ],
+      "short_passage_items": [
+        2,
+        3
+      ]
     },
     "time": {
-      "uncertain_inactivity_seconds": 120
+      "uncertain_inactivity_seconds": 120,
+      "underuse_observation_days": 14,
+      "underuse_reminder_cooldown_days": 14,
+      "underuse_gap_fraction_for_review": 0.5
     },
     "cost": {
       "shrinkage_prior_strength": 30,
