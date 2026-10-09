@@ -9,14 +9,13 @@
 - `docs/08`「可參考的做法」與 `policy-v1.json` 的 `reference_starting_points` 是參考，不是要求；可以採用、修改或替換。
 - `policy-v1.json` 的 `product` 是產品規則，必須遵守。所有數值（含你自己選的）都要能不改程式碼就調整，因為 beta 後會校準；改值要版本化，並跑回歸測試和受影響事件的 replay。
 - 寫成「為什麼」、引用 [Sxx] 的段落是背景，完整理由在 `docs/08`。
-- `contracts/content.sql`、`user.sql` 是參考草稿，不是必須遵守的 schema。
 - 只讀當前 milestone 需要的文件（下表），不要提前實作後面階段的內容。
 
 | Milestone | 必讀 | 需要時再查 |
 |---|---|---|
 | M0 | `PLAN.md`、`agent/START-M0.md`、`docs/02`、tasks.json 的 M0 | — |
-| M1 | `docs/05`、`docs/03` §2–§6、`contracts/sources.json`、`contracts/content.sql` | `docs/08` |
-| M2 | `docs/01`、`docs/02`、`contracts/user.sql`、`docs/06` §2 與 §6 | `docs/03` §6 |
+| M1 | `docs/05`、`docs/03` §2–§6、`contracts/sources.json` | `docs/08` |
+| M2 | `docs/01`、`docs/02`、`docs/06` §2 與 §6 | `docs/03` §6 |
 | M3 | `docs/03`、`docs/01` §5–§6、`contracts/policy-v1.json` 的 `product`、`docs/06` §2–§3 | `docs/08` 可參考的做法 |
 | M4 | `docs/04`（含 §9 模擬驗收門檻）、`docs/03` §6、`contracts/policy-v1.json` 的 `product`、`docs/01` §8 | `docs/08` 可參考的做法 |
 | M5 | `docs/05`、`docs/06` | 前面各階段的文件 |
@@ -59,7 +58,7 @@
 ## 內容
 - 素材有 source/license/derivation/review lineage；pending 權利不視為已批准。
 - AI 審核通過不是法律授權，也不是答案絕對正確。
-- contracts/content.sql、user.sql 是參考草稿，不是必須遵守的 schema；實作時依 docs/02 的資料需求自行設計 migration，並補真實回歸測試。
+- 資料表由實作依 docs/02 的資料需求自行設計，並補真實回歸測試。
 
 ## 每次交付
 報告完成的任務 ID、修改檔案、實際執行與未執行的驗證、政策/資料版本、限制和下一個可實作任務。

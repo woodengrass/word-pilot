@@ -32,20 +32,37 @@ iPhone-first、離線的英文詞彙 App，對象是台灣高中生。**目標�
 | 時間預算、考試、動態記憶率、新舊內容平衡、forecast | `docs/04-planner-personalization.md` |
 | 詞庫來源、AI pipeline、內容品質 | `docs/05-content-pipeline.md` |
 | QA 情境（含關鍵 QA）、測試、性能、beta 評估、發佈 | `docs/06-validation-release.md` |
-| 里程碑說明、團隊分工、後續階段 | `docs/07-roadmap-tasks.md` |
 | 任務、依賴、驗收條件 | `contracts/tasks.json` |
 | 產品規則數值（`product`）與可參考起始值（`reference_starting_points`） | `contracts/policy-v1.json` |
 | 設計理由、可參考的做法（演算法、出題順序）、未知問題 | `docs/08-research-decisions.md` |
 | 文獻與官方來源 [Sxx] | `contracts/sources.json` |
 | 研究資料隱私 | `docs/privacy-data-collection.md` |
-| 資料表參考草稿（非強制 schema） | `contracts/content.sql`、`contracts/user.sql` |
 | agent 工作規則與各階段要讀的文件 | `agent/AGENTS.md` |
 
 ## 里程碑
 
-M0 開發基礎 → M1 200 詞 + 30 片語內容 pilot → M2 離線字典與資料安全 → M3 學習循環 → M4 時間與考試規劃 → M5 完整內容與可靠性 → M6 同學 beta。
+| 階段 | 完成後能做什麼 | 不在這一階段做 |
+|---|---|---|
+| M0 開發基礎 | Xcode 可建置、測試可跑、本地持久化已驗證、依賴可重現、技術決策有紀錄。 | 學習算法、漂亮首頁、全量生成、帳號同步。 |
+| M1 內容 pilot | 200 詞 + 30 片語有來源、義項優先分級與合理語境選詞題，內容包可重建。 | 一口氣生成全部十萬題、完整考古題統計平台。 |
+| M2 離線字典與資料安全 | 查字、一鍵加入、批次匯入、local persistence、可備份還原。 | 學習效率模型的高階訓練。 |
+| M3 核心學習循環 | 以語境選詞為主的有效作答 -> 可追溯證據 -> 記憶排程與下一題；避免重複複習義務、可續接。 | 複雜 deadline 最佳化、fatigue personalization。 |
+| M4 自動規劃 | 每日時間與原始考試範圍／期限約束、forecast、合理調整新舊內容、資料夠多時的本機記憶校正。 | 精確因果得分率模型、CloudKit、Android、付費。 |
+| M5 完整內容與可靠性 | 內容擴展、版本遷移、壞題撤銷、實機負載、可供同學測試。 | 對外宣稱經證明提升學測成績。 |
+| M6 beta 與校正 | 跨日使用、修內容/體驗，以相同時間的未見語境題與原始範圍覆蓋檢驗效果。 | 無資料就上大型自適應模型；未通過 privacy gate 不啟用研究上傳。 |
 
-一次只做一個 milestone，完成後回報再進下一個。第一個入口：`agent/START-M0.md`。
+- 順序：M0 → M1 → M2 → M3 → M4 → M5 → M6。內容 pipeline 在 pilot 穩定後可與 App 開發並行；全量內容要等 M3 的題型與評分格式穩定再大規模生成，不要先生成後全部重做。
+- 里程碑以驗收為準，不承諾天數；資料授權、全量內容審查與真實延遲測試可能比寫 UI 更慢。
+- 34 個任務的依賴與驗收只寫在 `contracts/tasks.json`。依 `depends_on` 決定順序，同一 milestone 內沒有依賴的任務可並行。
+- 一次只做一個 milestone，完成後回報再進下一個。第一個入口：`agent/START-M0.md`。
+- 多 agent 協作：分工由主 agent 決定；schema/migration、lockfile、Xcode project 等共用檔案同時只有一個寫入者；獨立驗收先看資料完整性與錯誤評分。
+
+## 後續階段（V1 不實作）
+
+P1 Apple 裝置同步：真的有多 Apple 裝置需求後再做 CKSyncEngine adapter、account lifecycle、衝突與離線合併演練。[S12]
+P2 Android/桌面：依實際測試群決定 client 技術與中立 backend；共用內容 ID、事件 contract、政策 test vectors。不可讓两个獨立雲都掌管同一份狀態而沒有合併規則。
+P3 進階個人化：V1 的本機 FSRS 校正見 T032；後續候選模型見 `docs/08` 的「後續研究候選」。
+P4 收費/開源：分離 code/content 授權；不把營運決策塞入 V1 核心架構。
 
 ## 尚未決定、但不阻擋 M0
 
