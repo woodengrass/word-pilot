@@ -24,6 +24,7 @@
 每個 milestone 的任務與驗收條件一律以 `contracts/tasks.json` 為準。
 
 ## 範圍
+- 專案品牌與 App 顯示名稱為 `lexvane`；新建 Xcode 專案／Target 使用 `Lexvane`、Swift App 入口使用 `LexvaneApp` 命名。勿再使用過去的暫用名稱或專案舊名稱。
 - iOS-first、完全離線核心。不要自行新增登入、OCR、照片解析、runtime LLM、廣告或付費。研究用 backend 只有在對應 milestone 明確要求時才可加入，且必須遵守 `docs/privacy-data-collection.md`，不能變成 user-level telemetry。
 - 日常由系統排程，不能用「選 deck / 選模式 / 自評熟悉度」繞過需求。
 - 學生表現是最終目的：有考試時尊重完整指定範圍、期限與每日時間，優先看未見語境選詞能力；無期限時重視長期有用性。不要為了固定 retention、完成打卡或清空 backlog 機械地加工作業。
