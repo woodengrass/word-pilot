@@ -1,11 +1,11 @@
 # Privacy-preserving research data collection
 
 狀態：採用中的產品／架構原則  
-目的：在不建立任何可讀的單一使用者研究資料庫下，取得足以改善 Word Pilot 演算法的群體統計。**這是 V1 正式版持續改善演算法的重要交付能力，但不應成為每個學生使用離線 App 的前提。**
+目的：在不建立任何可讀的單一使用者研究資料庫下，取得足以改善 lexvane 演算法的群體統計。**這是 V1 正式版持續改善演算法的重要交付能力，但不應成為每個學生使用離線 App 的前提。**
 
 ## 核心決策
 
-Word Pilot 採用「方案 A」：
+lexvane 採用「方案 A」：
 
 - 完整作答歷史、學過哪些字、個人記憶曲線、個人化參數、精確時間線與 planner 狀態只留在使用者自己的裝置。
 - 個人化學習本身完全在本機運作，不需要把個人模型上傳。
@@ -50,7 +50,7 @@ Word Pilot 採用「方案 A」：
 
 ### 永遠留在裝置上的資料
 
-研究資料收集不應把下列內容傳到 Word Pilot 的研究基礎設施：
+研究資料收集不應把下列內容傳到 lexvane 的研究基礎設施：
 
 - raw answer / review events。
 - 個人學過或查過的完整 word / phrase 清單。
@@ -123,7 +123,7 @@ V1／beta 不把 differential-privacy noise 當預設必要條件。
 
 研究資料分享採 **explicit opt-in**：
 
-- 不同意也可完整使用 Word Pilot。
+- 不同意也可完整使用 lexvane。
 - 同意畫面要清楚說明：完整學習歷史與個人模型留在裝置上；對外只貢獻無法由研究端讀取的群體統計／模型更新。
 - 使用者可以撤回；撤回後不再產生新的研究 contribution。
 - 已經完成且無法拆回個人的群體 aggregate，不應宣稱可以再抽出某個人的貢獻；隱私政策要清楚說明這一點。
@@ -147,7 +147,7 @@ Apple App Review Guideline 5.1.1(ii) 要求收集 user / usage data 時取得使
 
 這個方案要能合理承諾：
 
-- Word Pilot application backend / database / dashboard 被攻破，不會得到可讀的單一使用者學習資料。
+- lexvane application backend / database / dashboard 被攻破，不會得到可讀的單一使用者學習資料。
 - 任一單一 aggregation party 被攻破，不足以還原 individual contribution（正式版；beta 單一聚合方期間不成立，見上方 Beta 階段）。
 - 研究端拿不到「來源 IP ↔ 可讀 contribution」的對應表。
 - 最終只有滿足最低群體門檻的預定 aggregate。
